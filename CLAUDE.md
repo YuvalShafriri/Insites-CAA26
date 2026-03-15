@@ -17,8 +17,8 @@ For all platform-specific development rules (GPT, Claude, Gemini), cross-platfor
 ```
 InSites-Brain/         # Core AI system artifacts — DEVELOPMENT FOCUS
   Claude/              # Claude-specific prompts and skills
-    Bot-Brain-en.md    # Master system prompt (English)
-    Bot-Brain-he.md    # Master system prompt (Hebrew)
+    InSites-CAA.md     # Master system prompt (current)
+    OLD/               # Archived: Bot-Brain-en/he.md (previous versions)
     KG-Skill-en/SKILL.md  # Knowledge Graph skill specification
     KG-artifacts/      # Frontend: kg.js, knowledge-graph.css, test HTML files
   Gemini/              # Google Gemini prompts and configurations
@@ -44,7 +44,7 @@ Upload to `/atar.bot/canvas/`:
 2. Upload knowledge files from same directory: `cbsa-method.md` (or `cbsa-method-lim.md`), `kg-spec.md`, `dashboard-spec.md`, `dashboard-reference-shape.md`
 
 ### Claude Bot (Claude.ai Projects)
-- Set `InSites-Brain/Claude/Bot-Brain-en.md` (or `-he.md`) as the Project prompt
+- Set `InSites-Brain/Claude/InSites-CAA.md` as the Project prompt
 - Add `InSites-Brain/Claude/KG-Skill-en/SKILL.md` as a Claude Skill
 
 ### Testing KG Rendering
@@ -90,10 +90,10 @@ The bot system guides users through a structured heritage assessment:
 ### Multi-Platform Parallel Versions
 Content is maintained in parallel across platforms. When modifying any of these areas, propagate changes to all relevant files:
 
-- **CBSA stage definitions/templates** → `Bot-Brain-en.md`, `Bot-Brain-he.md`, `atarbot-master-en.md`, Gemini files
-- **Entity types or KG schema** → `SKILL.md`, `kg.js`, Bot-Brain appendices [CA-KG] + [CA-EC]
-- **Operating rules** (evidence mandate, citation, HITL) → all Bot-Brain variants + `atarbot-system-en.md`
-- **Trigger phrases** → Bot-Brain variants + `atarbot-system-en.md`
+- **CBSA stage definitions/templates** → `InSites-CAA.md` (Claude), GPT knowledge files, Gemini files
+- **Entity types or KG schema** → `SKILL.md`, `kg.js`, `InSites-CAA.md` appendices [CA-KG] + [CA-EC]
+- **Operating rules** (evidence mandate, citation, HITL) → `InSites-CAA.md` (Claude) + GPT `instructions.md`
+- **Trigger phrases** → `InSites-CAA.md` (Claude) + GPT `instructions.md`
 
 ## Security
 

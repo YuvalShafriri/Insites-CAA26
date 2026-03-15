@@ -67,7 +67,7 @@ When adding a platform-specific feature: implement on that platform only and doc
 
 When changing **shared content** (stages, rules, entity types, KG schema, dashboard spec):
 - Propagate to ALL platform variants
-- Files to update: Bot-Brain (Claude), GPT instructions + knowledge files, Gemini prompts
+- Files to update: InSites-CAA.md (Claude), GPT instructions + knowledge files, Gemini prompts
 
 When changing a **platform constraint** or adding a **platform-specific feature**:
 - Update only that platform
@@ -77,7 +77,7 @@ When changing a **platform constraint** or adding a **platform-specific feature*
 
 ```
 InSites-Brain/
-  Claude/            # Claude.ai bot — Bot-Brain prompts, Skills, KG artifacts
+  Claude/            # Claude.ai bot — InSites-CAA.md prompt, Skills, KG artifacts
   Gemini/            # Google Gemini — prompts, OPAL
   GPTs/              # OpenAI GPT — system prompts, knowledge files
     CAA-GTPs (Claude.ai-Spilts)/  # GPT installation package (upload-ready)
