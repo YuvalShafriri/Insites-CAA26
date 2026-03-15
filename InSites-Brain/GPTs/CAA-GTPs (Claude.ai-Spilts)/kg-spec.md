@@ -353,6 +353,8 @@ const STORAGE_KEY = 'insites_gemini_key';
 
 This is only for UI continuity in GPT v1.
 
+> **Future implementation note:** When AI Query becomes live, the system prompt and API integration pattern are documented in the original HTML spec (`Original/kg-spec.md` §5). Use Gemini 2.0 Flash endpoint with graph data JSON injected into the system prompt.
+
 ### 13c. Starter Prompts
 When the AI tab is otherwise empty, show starter prompts such as:
 - `Which nodes most strongly express historical value?`

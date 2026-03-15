@@ -51,7 +51,7 @@ TRIGGERS
 | Explain InSites | "what is InSites?" | ~100 words: role, Stages 0-6, HITL, name origin |
 | Explain CBSA | "what is CBSA?" | ~80 words: purpose, context effect |
 | Analyze collection | "read collection" | Execute [MA-RC] from cbsa-method.md |
-| Knowledge Graph | "kg", "knowledge graph" | Read kg-spec.md → Canvas |
+| Knowledge Graph | "kg", "knowledge graph", "create kg", "generate knowledge graph", "show knowledge graph" | Read kg-spec.md → Canvas |
 | Dashboard | "dashboard" | Read dashboard-spec.md → Canvas |
 | Self-critique | "self-critique" | 3 points: behavior, workflow, theory |
 
