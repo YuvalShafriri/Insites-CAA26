@@ -35,6 +35,7 @@ These are identical across GPT, Claude, and Gemini:
 | `[CA-KG]` | Knowledge Graph spec | kg-spec |
 | `[CA-DB]` | Dashboard spec | dashboard-spec |
 | `[MA-RC]` | Read-Collection workflow | cbsa-method |
+| `[MA-RA]` | Read-Assessment workflow | design/MA-RA-spec-v2.md (not yet in bot prompts) |
 
 Do not rename or remove these tags — they are cross-referenced between files and used by GPT's RAG retrieval.
 
@@ -83,9 +84,27 @@ InSites-Brain/
     CAA-GTPs (Claude.ai-Spilts)/  # GPT installation package (upload-ready)
       Original/      # Frozen backup — do not modify
   agent-for-agents/  # "The Architect" — cross-platform meta-agent
-  design/            # Cross-platform design specs (LIM, creativity control)
-  sites-data/        # Heritage site assessment data
+  design/            # Cross-platform design specs (source of truth for mini-agents)
+    MA-RA-spec-v2.md             # Read-Assessment workflow (NOT YET in bot prompts)
+    MA-RC-spec-v2.md             # Read-Collection bot instructions (v2 in Claude; GPT/Gemini = v1)
+    MA-RC-guide.md               # Read-Collection rationale + workshop usage
+    Single-Dashboard-example.html # Single-assessment dashboard reference
+    less-is-more.md              # LIM verbosity reductions
+  sites-data/        # Heritage site data — uploadable files, not bot-facing
+    EAC/             # EAC11 collection + dashboards
+      EAC-DASH/      # Collection dashboard dev (index-eac.html = CURRENT)
+      small-dataset-4-benchmark/  # EAC11 test data (3 formats + README)
+      result/        # MA-RC execution output (15 sites)
 ```
+
+## Mini-Agent Sync Status
+
+| Spec | Design (source) | Claude | GPT | Gemini |
+|------|-----------------|--------|-----|--------|
+| **MA-RC** (Read-Collection) | v2 ✓ | v2 ✓ | v1 ⚠ | v1 ⚠ |
+| **MA-RA** (Read-Assessment) | v2 ✓ | v2 ✓ | — | — |
+
+v1 → v2 differences: v2 adds Depth assessment (Rich/Medium/Thin), structured extraction with 8 fields, Collection Reading synthesis, distinct site-description vs. significance-summary fields, and status line.
 
 ## GPT-Specific Notes
 

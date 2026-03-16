@@ -25,8 +25,19 @@ InSites-Brain/         # Core AI system artifacts — DEVELOPMENT FOCUS
   GPTs/                # OpenAI Custom GPT system prompt and knowledge files
     CAA-GTPs (Claude.ai-Spilts)/  # GPT installation package for Claude.ai Projects
   agent-for-agents/    # "The Architect" — meta-agent for Ethics in Practice session
-  design/              # Cross-platform design specs (LIM, creativity control, etc.)
-  sites-data/          # Heritage site data and assessments
+  design/              # Cross-platform design specs (source of truth)
+    MA-RA-spec-v2.md   # Read-Assessment (single) — workflow spec
+    MA-RC-spec-v2.md   # Read-Collection — bot instructions spec
+    MA-RC-guide.md     # Read-Collection — rationale & workshop usage
+    Single-Dashboard-example.html  # Single-assessment dashboard reference
+    less-is-more.md    # LIM verbosity reductions
+  sites-data/          # Heritage site data — uploadable files, not bot-facing
+    EAC/               # EAC11 collection dataset + dashboard
+      EAC-DASH/        # Collection dashboard (index-eac.html = current)
+      small-dataset-4-benchmark/  # EAC11 test data (3 formats)
+      result/          # MA-RC execution output
+    Samples and Sites Descriptions/  # Workshop input data
+    mills-2021.json    # Mills collection data
   MANIFEST.md          # Artifact deployment guide
 management/            # Workshop logistics (excluded from Claude Code via .claudeignore)
 .github/instructions/  # Snyk security rules (always-on)
@@ -53,6 +64,26 @@ Open in a browser to verify:
 - `InSites-Brain/Claude/KG-artifacts/test-kg-he.html` — RTL layout, Hebrew labels
 
 Verify: correct node colors per entity type, click-to-info panel, Escape to close.
+
+### Testing Read Workflows
+
+**MA-RC (Read-Collection):**
+- Test data: `InSites-Brain/sites-data/EAC/small-dataset-4-benchmark/EAC11_Collection_FreeText.md`
+- Upload to bot, trigger "read collection"
+- Expected: Intake (Depth: Rich), Extraction table (15 sites), Collection Reading, stop prompt
+- Reference output: `InSites-Brain/sites-data/EAC/result/MA-RC-execution-15sites.md`
+
+**MA-RA (Read-Assessment):**
+- Test data: `InSites-Brain/sites-data/Samples and Sites Descriptions/wokshop-shared-assessments/` (4 CBSA outputs as .docx)
+- Upload one file, trigger "read assessment"
+- Expected: Assessment Profile (coverage table), Reading Menu, selected reading execution
+- Dashboard reference: `InSites-Brain/design/Single-Dashboard-example.html`
+
+**Claude.ai Project deployment:**
+1. Set `InSites-Brain/Claude/InSites-CAA.md` as Project prompt
+2. Add `InSites-Brain/Claude/KG-Skill-en/SKILL.md` as a Claude Skill
+3. Upload test data files to the project conversation
+4. Test triggers: "start", "read collection", "read assessment", "kg", "dashboard"
 
 ## Core Architecture
 
@@ -94,6 +125,21 @@ Content is maintained in parallel across platforms. When modifying any of these 
 - **Entity types or KG schema** → `SKILL.md`, `kg.js`, `InSites-CAA.md` appendices [CA-KG] + [CA-EC]
 - **Operating rules** (evidence mandate, citation, HITL) → `InSites-CAA.md` (Claude) + GPT `instructions.md`
 - **Trigger phrases** → `InSites-CAA.md` (Claude) + GPT `instructions.md`
+
+### Mini-Agent Specs — Read Workflows
+
+Two "Read" mini-agents handle post-assessment analysis. Source-of-truth specs live in `design/`; deployed versions are embedded inline in bot prompts.
+
+| Spec | Purpose | Design (source) | Claude | GPT | Gemini |
+|------|---------|-----------------|--------|-----|--------|
+| **MA-RA** | Read single assessment | v2 ✓ | — (not yet integrated) | — | — |
+| **MA-RC** | Read collection | v2 ✓ | v2 ✓ | v1 ⚠ (pending sync) | v1 ⚠ (pending sync) |
+
+**Dashboards** are separate per workflow:
+- **Single-assessment dashboard**: `design/Single-Dashboard-example.html` — reference output for MA-RA
+- **Collection dashboard**: `sites-data/EAC/EAC-DASH/index-eac.html` — EAC11 collection visualization (current)
+
+Both dashboards share visual language (stone/amber palette, serif typography) but serve different analytical purposes.
 
 ## Security
 
