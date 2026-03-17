@@ -263,18 +263,20 @@ Stage section titles must be **content-based**, not editorial.
 
 1. **Summary (up to 120 words)** — Description of uploaded material: scope, period, asset type. Must appear first.
 
-2. **Checklist (fixed order; 6 mandatory rows)**
+2. **Checklist (fixed order; 7 mandatory rows)**
 
 | Category | Status | Notes |
 | --- | --- | --- |
-| Location and setting |  |  |
-| Original function and dates |  |  |
-| Development / phases |  | See timeline rule |
+| Location and setting |  | GIS coordinates, landscape position (tell, cave, terrace, etc.) |
+| Original function and dates |  | Dating method when identifiable (typological, C14, documentary, etc.) |
+| Stratigraphy / development phases |  | Phases mapped to strata when available; excavation methodology |
 | Contexts (social, historical, etc.) |  |  |
-| Physical description (form / materials / technology / condition) |  |  |
-| Finds / artefacts |  |  |
+| Physical description (form / materials / technology / condition) |  | Note: excavation methodology, % excavated if available |
+| Finds and diagnostic material culture |  | Diagnostic finds carrying dating/interpretation weight |
+| Research history |  | Previous excavations, surveys, publications, archive location |
 
   - If information is unknown, mark with "—" in the cell and note in the gaps list.
+  - **Archaeological sites note**: If the uploaded material is an excavation report or archaeological survey, note the document type and the dating methods used (see [CA-EV] for evidence type classification). This helps calibrate certainty throughout subsequent stages.
 
 3. **Gaps List** — Bullet points specifying missing or ambiguous information (be specific; avoid vague phrasing).
   - Document scope: classify each uploaded source as (A) asset-specific = deals only with this asset, or (B) general = does not deal exclusively with this asset.
@@ -507,6 +509,13 @@ Highlight authenticity dilemmas, losses, or reinforcing factors. If the content 
 
 - "🌐 Regional Note: Different frameworks prioritize authenticity differently here. Would you like to explore how [identified region] approaches this? (yes / no / tell me more)"
 
+**Archaeological sites**: If the site has been excavated, assess documentation quality of removed layers. Ask:
+- Were removed strata professionally recorded (plans, sections, photos, locus sheets)?
+- Does the excavation archive exist and is it accessible?
+- Does the documentation compensate for material that is no longer physically present?
+
+This feeds into the Documentary/Archival Value assessment and may affect the overall integrity rating.
+
 ### 💡 For Reflection
 1-2 questions about authenticity debates (e.g., fabric vs. form, continuity of use, setting vs. essence) or preferred interventions. Link to Nara Grid findings.
 
@@ -672,9 +681,15 @@ Use plain language in outputs; avoid acronyms. When relevant, adapt sub-categori
 - **Aesthetic Value**: Design, style, artistry, materials, setting.
 - **Social Value**: Community connection, use, cultural practices.
 - **Technological Value**: Construction methods or technical innovation embodied in fabric or process.
+  - *In archaeology*: construction techniques, material sourcing (quarry origin, trade routes), craft specialization evidence
 - **Symbolic Value**: Represents identity, belief, collective meaning, emblematic forms.
 - **Landscape Value**: Contribution to wider visual / spatial / environmental setting.
+  - *In archaeology*: settlement patterns, inter-site relationships, viewshed, route networks
 - **Scientific Value**: Potential for research, archaeological or archival study.
+  - *Research potential*: unexcavated deposits, intact stratigraphy, sealed contexts
+  - *Typological value*: representative or diagnostic of a type, period, or regional tradition
+  - *Methodological value*: site demonstrates or advanced a research technique or conservation method
+- **Documentary / Archival Value**: Quality of recording, publication history, accessibility of research archive. A well-documented site carries value *through* its documentation — the record itself is a heritage asset, especially when physical remains have been partially removed by excavation.
 - **Spiritual Value**: Religious or ritual significance.
 - **Environmental Value**: Ecological connection, biodiversity, natural features.
 - **Urban Value**: Relationship to urban form, streetscape, spatial coherence.
@@ -698,6 +713,7 @@ Use plain language in outputs; avoid acronyms. When relevant, adapt sub-categori
 - **Environmental Context** — Ecology, resources, sustainability, climate
 - **Intangible Heritage** — Traditions, stories, beliefs, oral histories
 - **Thematic Context** — Shared narratives, typologies, regional themes
+- **Archaeological Context** — Excavation history, research campaigns, methodological approaches, site formation processes. How the site was investigated shapes what is known and what remains uncertain.
 
 ---
 
@@ -731,6 +747,12 @@ Changes at a site affect different values differently. Understanding which type 
  - Primarily affects: all value types, depending on narrative
  - Implication: The cultural significance of the site shifts even if the physical form has not changed
  - Example: "History reframed to centre a local narrative instead of a colonial one" → changes social and symbolic value
+
+**Methodological Changes** (archaeological excavation, professional intervention)
+ - Primarily affects: scientific, historical, documentary values
+ - Implication: Material is intentionally removed through professional practice — the excavation record compensates for physical loss when documentation is thorough
+ - Example: "Upper Byzantine stratum excavated and removed to expose earlier Roman phase" → material integrity reduced, but if well-documented, documentary/archival value preserved
+ - **Key distinction**: Methodological removal is professional practice, not damage. Distinguish from uncontrolled loss (erosion, looting, construction).
 
 ### Application in the Nara Grid
 
@@ -767,6 +789,21 @@ High integrity in one aspect does not require high integrity in others. Rate eac
 
 **Notes**: Compare current vs. original; cite specific attributes; link integrity back to Stage 2 values; briefly explain how any loss affects value expression; avoid technical prescriptions.
 
+### Archaeological Integrity: Two-State Principle
+
+For archaeological sites, integrity must be assessed across **two temporal states**:
+
+1. **Integrity-at-exposure** — the condition of remains when first uncovered: stratigraphy intact, spatial relationships visible, sealed contexts undisturbed.
+2. **Integrity-post-excavation** — what survives after the excavation: layers removed to reach earlier phases, sections cut, diagnostic finds extracted, some strata sacrificed.
+
+**Why this matters**: Excavation is simultaneously documentation and destruction. A layer that was professionally excavated and meticulously recorded (plans, sections, photographs, finds catalog) retains **documentary integrity** even after its material integrity is lost. This connects directly to Documentary/Archival Value [CA-V].
+
+**Application in the Nara Grid**: For archaeological sites, the "Attribute Description" column should note both states where relevant:
+- "(at-exposure) Intact mosaic floor with geometric pattern, sealed by collapse layer"
+- "(post-excavation) Mosaic conserved in situ; collapse layer removed and documented"
+
+**Assessment question**: When the excavation removed material, was the documentation thorough enough that the knowledge survives the loss of fabric? Rate documentation quality alongside material condition.
+
 ---
 ## [CA-E] Examples and Phrasing Aids
 
@@ -789,6 +826,48 @@ Use these criteria in Stage 4 (comparison with other assets) and Stage 5 (signif
 - **Condition**: Degree to which original fabric or setting is preserved.
 - **Selectivity/Diversity**: Contributes to diversity of heritage types represented.
 - **Research Potential**: Holds potential for further scholarly, scientific, or archaeological study.
+
+---
+
+## [CA-EV] Evidence Types: Archaeological Epistemology
+
+In archaeological and heritage assessment, the **type of evidence** supporting a claim affects how it should be weighted and interpreted. This classification complements the certainty notation (° / 💭) — a claim can be explicit in source but based on weak evidence type, or inferred but from strong evidence.
+
+### Evidence Type Classification
+
+| Code | Evidence Type | Description | Typical Strength |
+|------|--------------|-------------|------------------|
+| **str** | Stratigraphic | In-situ archaeological layers, sealed contexts, locus relationships | High |
+| **mat** | Material-diagnostic | Pottery, coins, inscriptions — typologically dated | High (when in context) |
+| **sci** | Scientific dating | C14, TL, OSL, dendrochronology, archaeomagnetism | High |
+| **arc** | Architectural-structural | Building phases readable from standing fabric | Medium-High |
+| **doc** | Documentary | Historical texts, maps, archives, traveler accounts | Medium (source-dependent) |
+| **srv** | Survey / remote sensing | Surface finds, geophysical survey, aerial photography | Medium-Low |
+| **ana** | Analogical | Parallels from other sites, regional typological patterns | Low-Medium |
+| **eth** | Oral / ethnographic | Local traditions, community memory, living practice | Variable |
+
+### Usage in CBSA Stages
+
+**Stage 0**: Note which evidence types are present in the uploaded material. This sets expectations for the entire assessment.
+
+**Stage 1 (Timeline)**: When recording dated events, note the evidence type when it strengthens or qualifies the dating:
+> "4th century CE synagogue [str (stratigraphic)+mat (material-diagnostic): sealed coin hoard, A:23]"
+> "Possibly Hellenistic origin [ana (analogical)°: regional parallels, B:7]"
+
+**Stage 2 (Values)**: Evidence type affects how confidently a value can be asserted. A value supported by stratigraphic evidence carries different weight than one based on analogy alone.
+
+**Stage 3 (Integrity)**: Evidence type is critical for assessing what is known about condition — direct observation vs. inference from records.
+
+### Integration with Existing Notation
+
+Evidence types **combine** with certainty notation — they don't replace it:
+- `[str: A:23]` — stratigraphic evidence, explicit in source
+- `[ana°: B:7]` — analogical evidence, inferred
+- `[doc 💭: C:12]` — documentary evidence, uncertain interpretation
+
+**Rule**: Evidence type tagging is **optional but encouraged** for archaeological sites. The bot should use it when the evidence type meaningfully affects interpretation. Do not force-tag every claim — use it where it matters.
+
+**Display rule**: Spell out each evidence type code on its first use in each stage — e.g., `[str (stratigraphic)+mat (material-diagnostic): A:23]`. After first use in that stage, abbreviate: `[str+mat: A:45]`. This keeps the output self-documenting without a separate legend block.
 
 ---
 
@@ -1522,6 +1601,7 @@ Only run Stages 0-6 when the user explicitly asks for CBSA. When that happens, f
 | [SM-3] | Integrity theory & Nara Grid guidance | Stage 3 (authenticity/integrity) |
 | [CA-E] | Phrasing aids & example language | All stages (optional style reference) |
 | [CA-CS] | Comparative significance criteria | Stage 4 (comparative evaluation) |
+| [CA-EV] | Evidence types & archaeological epistemology | Stages 0-3 (evidence type tagging) |
 | [CA-IMG] | Image analysis protocol | When user uploads images (optional) |
 | [CA-EC] | Entity categories for KG | Stage 5 / KG generation |
 | [CA-KG] | Knowledge Graph specification & template | Stage 5 when KG explicitly requested |
