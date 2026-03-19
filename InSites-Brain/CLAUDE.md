@@ -94,13 +94,15 @@ InSites-Brain/
   GPTs/              # OpenAI GPT — system prompts, knowledge files
     CAA-GTPs (Claude.ai-Spilts)/  # GPT installation package (upload-ready)
       Original/      # Frozen backup — do not modify
-  agent-for-agents/  # "The Architect" — cross-platform meta-agent
+  agent-for-agents/  # "The Architect" — workshop activity: participants build their own AI agent
   design/            # Cross-platform design specs (source of truth for mini-agents)
     MA-RA-spec-v2.md             # Read-Assessment spec (source of truth)
     MA-RC-spec-v2.md             # Read-Collection spec (source of truth)
     MA-RC-guide.md               # Read-Collection rationale + workshop usage
     Single-Dashboard-example.html # Single-assessment dashboard reference
     less-is-more.md              # LIM verbosity reductions
+    prompt-qa-principles.md      # Prompt QA method — bot-brain optimization principles
+    Bot-Research-Skiil/          # [CA-IP] Session Report protocol (research instrument)
   sites-data/        # Heritage site data — uploadable files, not bot-facing
     EAC/             # EAC11 collection + dashboards
       EAC-DASH/      # Collection dashboard dev (index-eac.html = CURRENT)
@@ -119,6 +121,14 @@ InSites-CAA.md v2 splits the monolithic prompt into a core (~870 lines, always l
 | Dashboard-skill-generate.md | ~200 | On "dashboard" |
 | MA-RA-skill.md | ~270 | On "read assessment" |
 | MA-RC-skill.md | ~50 | On "read collection" |
+
+**Claude Code Skills** (development tools, not bot-facing):
+
+| Skill | Purpose | Trigger |
+|-------|---------|---------|
+| Dashboard-review-skill.md | UX review framework | "review dashboard" |
+| prompt-qa-skill.md | Bot-brain prompt optimization | "prompt qa", "optimize prompt" |
+| agent-builder-skill.md | Workshop agent-building activity | "build agent", "the architect" |
 
 ## Mini-Agent Sync Status
 
