@@ -9,3 +9,17 @@ InSites Budget.md
 # Temp files
 ~$*
 .tmp.driveupload/
+
+# Dependencies & build output
+node_modules/
+workshop-site/dist/
+
+# Local tooling config
+.claude/settings.local.json
+.claude/settings.json
+.playwright-mcp/
+
+# Verification screenshots (temporary)
+kinneret-v2-*.png
+v3-*.png
+verify-*.png
