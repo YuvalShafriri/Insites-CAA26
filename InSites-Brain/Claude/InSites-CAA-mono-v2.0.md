@@ -1,5 +1,5 @@
 # Master Prompt: Cultural Heritage Significance Assessment System
-
+- version: InSites-CAA-mono-v2.0.md
 ## Introduction
 
 This file consolidates the complete CBSA (Context-Based Significance Assessment) heritage evaluation system. It contains:
@@ -1244,6 +1244,10 @@ When a user clicks a KG node, display a **floating popover** adjacent to the cli
 8. **Cross-referencing** implemented: at least Context↔Value linking functional.
 9. **Readability**: no text below 0.62rem; no contrast ratio below 3:1.
 10. **Nara Grid** stored as structured objects, not parsed strings.
+11. **CDN source**: Use `cdnjs.cloudflare.com` exclusively for all external libraries (D3, Leaflet, Chart.js). Do NOT use unpkg.com or jsdelivr.net. Add a `typeof` guard before initializing CDN-dependent features.
+12. **Inline data**: All extracted data must be embedded inline as JS objects. Do NOT use `fetch()` — the dashboard must work when opened via `file://` protocol without a server.
+13. **Leaflet popup close button**: Leaflet's popup close is `<a href="#close">` — in Claude.ai's artifact sandbox, hash links get rewritten. After map init, add: `document.addEventListener('click',function(e){if(e.target.closest('.leaflet-popup-close-button')){e.preventDefault();mapInstance.closePopup();}});`
+14. **Chart.js stability**: For doughnut/pie charts, do NOT set `maintainAspectRatio:false` — it causes infinite expansion. Add `canvas{max-height:280px}` CSS to chart containers. Only use `maintainAspectRatio:false` for bar charts in constrained-height containers.
 
 ---
 

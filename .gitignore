@@ -1,5 +1,5 @@
-# Excluded from repo
-OLD/
+# Excluded from repo — all OLD/ folders anywhere
+**/OLD/
 promptsEngineering/
 sakem-li/
 InSites Budget.md

@@ -12,35 +12,83 @@ The project is an output of the **InSites Knowledge Lab**, which develops comput
 
 For all platform-specific development rules (GPT, Claude, Gemini), cross-platform sync policies, and the convergence principle, see `InSites-Brain/CLAUDE.md`.
 
-## Repository Structure
+## Repository Structure — Active vs Inactive
+
+**IMPORTANT**: Do NOT read, suggest changes to, or reference ⛔ items unless explicitly asked. All `OLD/` folders everywhere are archived and excluded via `.claudeignore` + `.gitignore` (`**/OLD/`).
+
+### ✅ ACTIVE CODE — workshop-site/
+
+Live companion site at `alephplace.com/CAA26`. Vite + React + TypeScript + Tailwind.
 
 ```
-InSites-Brain/         # Core AI system artifacts — DEVELOPMENT FOCUS
-  Claude/              # Claude-specific prompts and skills
-    InSites-CAA.md     # Master system prompt (current)
-    OLD/               # Archived: Bot-Brain-en/he.md (previous versions)
-    KG-Skill-en/SKILL.md  # Knowledge Graph skill specification
-    KG-artifacts/      # Frontend: kg.js, knowledge-graph.css, test HTML files
-  Gemini/              # Google Gemini prompts and configurations
-  GPTs/                # OpenAI Custom GPT system prompt and knowledge files
-    CAA-GTPs (Claude.ai-Spilts)/  # GPT installation package for Claude.ai Projects
-  agent-for-agents/    # "The Architect" — meta-agent for Ethics in Practice session
-  design/              # Cross-platform design specs (source of truth)
-    MA-RA-spec-v2.md   # Read-Assessment (single) — workflow spec
-    MA-RC-spec-v2.md   # Read-Collection — bot instructions spec
-    MA-RC-guide.md     # Read-Collection — rationale & workshop usage
-    Single-Dashboard-example.html  # Single-assessment dashboard reference
-    less-is-more.md    # LIM verbosity reductions
-  sites-data/          # Heritage site data — uploadable files, not bot-facing
-    EAC/               # EAC11 collection dataset + dashboard
-      EAC-DASH/        # Collection dashboard (index-eac.html = current)
-      small-dataset-4-benchmark/  # EAC11 test data (3 formats)
-      result/          # MA-RC execution output
-    Samples and Sites Descriptions/  # Workshop input data
-    mills-2021.json    # Mills collection data
-  MANIFEST.md          # Artifact deployment guide
-management/            # Workshop logistics (excluded from Claude Code via .claudeignore)
-.github/instructions/  # Snyk security rules (always-on)
+workshop-site/
+  App.tsx, index.tsx, index.css, index.html   # Entry points
+  components/                                  # React UI (layout/, views/, graph/, mobile/, modals/, common/)
+  hooks/                                       # Custom hooks
+  services/                                    # geminiService.ts
+  utils/                                       # Helpers
+  config/                                      # Constants, sample texts
+  types.ts, constants.tsx, sampleTexts.ts      # Shared types/data
+  public/                                      # Static assets
+  docs/                                        # Demo dashboard HTML
+  vite.config.ts, tailwind.config.js, tsconfig.json, package.json
+```
+
+### ✅ ACTIVE PROMPTS — Deployed to Claude.ai / GPT / Gemini
+
+```
+InSites-Brain/
+  Claude/InSites-CAA.md                        # Primary Claude bot prompt (skills-split, ~870 lines)
+  Claude/InSites-CAA-mono-v2.0.md              # Monolithic version (development/testing)
+  Claude/skills/*.md                           # 7 Claude.ai Project Skills (on-demand)
+  GPTs/CAA-GTPs (Claude.ai-Spilts)/            # OpenAI GPT package (instructions.md + knowledge files)
+  Gemini/*.md                                  # Google Gemini bot prompts (4 files)
+  agent-for-agents/agent-for-agents-en.md      # "The Architect" meta-agent (en + he)
+  agent-for-agents/agent-for-agents-he.md
+```
+
+### ✅ ACTIVE — Claude Code skills (.claude/skills/)
+
+```
+.claude/skills/agent-builder/SKILL.md          # /agent-builder
+.claude/skills/prompt-qa/SKILL.md              # /prompt-qa
+.claude/skills/cbsa-ux-review/SKILL.md         # /cbsa-ux-review
+```
+
+### 📐 REFERENCE — Read-only specs, don't modify unless asked
+
+```
+InSites-Brain/design/                          # Source-of-truth workflow specs
+  MA-RA-spec-v2.md, MA-RC-spec-v2.md, MA-RC-guide.md
+  Single-Dashboard-example.html                # Dashboard reference implementation
+  less-is-more.md, prompt-qa-principles.md     # Optimization principles
+  Bot-Research-Skiil/                          # [CA-IP] Session Report specs
+InSites-Brain/Claude/KG-Skill-en/SKILL.md     # Advanced KG spec (reference only)
+InSites-Brain/Claude/plans/                    # Enhancement roadmap
+InSites-Brain/CLAUDE.md                        # Cross-platform dev guide
+```
+
+### 📦 DATA — Heritage site data, test inputs, benchmark outputs
+
+```
+InSites-Brain/sites-data/
+  EAC/EAC-DASH/index-eac.html                 # Current collection dashboard
+  EAC/small-dataset-4-benchmark/               # MA-RC test data (3 formats)
+  EAC/result/                                  # MA-RC reference execution output
+  Samples and Sites Descriptions/              # Workshop input samples
+  mills-2021.json                              # Mills heritage collection
+```
+
+### ⛔ DO NOT READ — Archived, deployed elsewhere, or excluded
+
+```
+**/OLD/                                        # All OLD/ folders (gitignored + claudeignored)
+InSites-Brain/Claude/KG-artifacts/             # kg.js + CSS — deployed to alephplace.com, not active code here
+InSites-Brain/Claude/global-claude-ai-skills/  # Superseded by project skills
+management/                                    # Workshop logistics (.claudeignore)
+content-dev/                                   # Staging area (.claudeignore)
+promptsEngineering/                            # Reference PDFs (.claudeignore)
+sakem-li/                                      # Research background (.claudeignore)
 ```
 
 ## Deployment
