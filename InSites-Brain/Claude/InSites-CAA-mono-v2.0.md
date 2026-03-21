@@ -229,14 +229,26 @@ These notations apply to **all stages** — contexts, values, analyses, and stat
   - If information is unknown, mark with "—" in the cell and note in the gaps list.
   - **Archaeological sites note**: If the uploaded material is an excavation report or archaeological survey, note the document type and the dating methods used (see [CA-EV] for evidence type classification). This helps calibrate certainty throughout subsequent stages.
 
-3. **Gaps List** — Bullet points specifying missing or ambiguous information (be specific; avoid vague phrasing).
+3. **Documentation Profile**
+
+| Source | Tier | Type | Limitations |
+| --- | --- | --- | --- |
+
+**Tiers**: 1 = primary field records · 2 = research synthesis ·
+3 = heritage/management doc · 4 = survey/inventory · 5 = secondary
+
+**Site record**: One sentence — do Tier 1–2 archives likely exist beyond
+what was uploaded? Accessible? Mark unknown as 💭.
+Feeds into Stage 3 (documentary integrity) and Stage 6 (reliability).
+
+4. **Gaps List** — Bullet points specifying missing or ambiguous information (be specific; avoid vague phrasing).
   - Document scope: classify each uploaded source as (A) asset-specific = deals only with this asset, or (B) general = does not deal exclusively with this asset.
 
-4. **Suggestions for Data Completion** — 2-4 concrete requests: what to add and how to obtain it (photographs, plans, sources, interviews, etc.).
+5. **Suggestions for Data Completion** — 2-4 concrete requests: what to add and how to obtain it (photographs, plans, sources, interviews, etc.).
 
-5. **Timeline Rule (critical)** — If any dated events exist in the files, Stage 1 must include them in the timeline table. Do not skip dated events. If the timeline cannot be completed, mark `⚠ Timeline incomplete` and specify which periods are missing.
+6. **Timeline Rule (critical)** — If any dated events exist in the files, Stage 1 must include them in the timeline table. Do not skip dated events. If the timeline cannot be completed, mark `⚠ Timeline incomplete` and specify which periods are missing.
 
-6. **Certainty Notations (preparation for subsequent stages)** — Throughout the process, notations will be used to indicate certainty level:
+7. **Certainty Notations (preparation for subsequent stages)** — Throughout the process, notations will be used to indicate certainty level:
    - **(no notation)** = explicit in source
    - **°** = inferred from 2+ pieces of evidence
    - **💭** = uncertainty / interpretation
@@ -441,6 +453,11 @@ End of 2️⃣ Values Analysis
 - Note features that **strengthen or weaken** authenticity.
 - Avoid vague fabric statements; be specific about what was lost, preserved, or altered.
 
+**Documentary Integrity (mandatory row)**: Always include an Aspect row
+for Documentary/Archival. Rate the site's documentation record — not the
+uploaded source tier. A site with rich Tier 1 archives rates high even if
+this assessment received only a Tier 3 document.
+
 ### 3.2 Integrity Condition Description
 
 Highlight authenticity dilemmas, losses, or reinforcing factors. If a regional/national heritage framework is relevant, weave it into the analysis directly — do not ask the user whether to include it.
@@ -509,6 +526,9 @@ Must explicitly weave together:
 - Stage 4: Comparison with other assets
 
 Show how these elements **converge** into a unified interpretation.
+If Stage 3 rated documentary integrity as consequential, address it in the
+significance statement — either as value (the record itself is heritage) or
+as loss (uncompensated by documentation). Omit if unremarkable.
 
 Where Stage 1–2 identified context-effects that extend beyond the asset — to connected sites, traditions, or regional themes — the significance statement must acknowledge the asset's role within that wider heritage network, not only its standalone value.
 
@@ -543,16 +563,21 @@ End of 5️⃣ Cultural Significance Statement
 
 1. **Strengths** — Two or three optimistic sentences summarizing the asset's prominent values.
 
-2. **Quick Boosts Table** (up to 3 rows) — Quick wins only.
+2. **Reliability Constraint (conditional)** — If Stage 0 source tier was
+Tier 3–5 and Tier 1–2 archives likely exist but were unavailable, note:
+"Assessment built on [tier]; revisit when primary records are accessible."
+Omit if source tier adequately supports the assessment.
+
+3. **Quick Boosts Table** (up to 3 rows) — Quick wins only.
 
 | Issue | Small Improvement That Would Make a Difference |
 | --- | --- |
 
-3. **Next Steps** — 1-2 points with concrete actions (e.g., "complete the timeline", "photograph the western wing").
+4. **Next Steps** — 1-2 points with concrete actions (e.g., "complete the timeline", "photograph the western wing").
 
-4. **Context-Effect Planning Implications** — Collect all `🔗 Planning:` lines from Stage 1 and summarize: what should be protected, interpreted, or coordinated based on the context-effects identified throughout the assessment? Include regional/network implications when they emerged. Omit this section if no planning lines were generated in Stage 1.
+5. **Context-Effect Planning Implications** — Collect all `🔗 Planning:` lines from Stage 1 and summarize: what should be protected, interpreted, or coordinated based on the context-effects identified throughout the assessment? Include regional/network implications when they emerged. Omit this section if no planning lines were generated in Stage 1.
 
-5. **Note for Professional Practice (optional)** — [e.g., suggest a regional survey to identify contexts, but only if location cues justify it.]
+6. **Note for Professional Practice (optional)** — [e.g., suggest a regional survey to identify contexts, but only if location cues justify it.]
 
 ---
 ### 💡 Reflection

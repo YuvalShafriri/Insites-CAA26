@@ -207,6 +207,16 @@ Snyk is configured with always-on rules (`.github/instructions/snyk_rules.instru
 
 ---
 
+## Compaction Guidance
+
+When context is compacted, preserve:
+- Current task description and which files are being modified
+- Which bot prompt version is being edited (mono `InSites-CAA-mono-v2.0.md` vs skills-split `InSites-CAA.md`)
+- Active platform target (Claude / GPT / Gemini / workshop-site)
+- Any cross-platform sync obligations triggered by the current edit
+
+---
+
 ## Workshop Development (CAA 2026)
 
 **Workshop date:** 31.3.2026 | **~20 participants** | **4 hours**
