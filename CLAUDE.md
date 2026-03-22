@@ -39,7 +39,7 @@ workshop-site/
 ```
 InSites-Brain/
   Claude/InSites-CAA.md                        # Primary Claude bot prompt (skills-split, ~870 lines)
-  Claude/InSites-CAA-mono-v2.0.md              # Monolithic version (development/testing)
+  Claude/InSites-CAA-mono-v2.1.md              # Monolithic version (development/testing)
   Claude/skills/*.md                           # 7 Claude.ai Project Skills (on-demand)
   GPTs/CAA-GTPs (Claude.ai-Spilts)/            # OpenAI GPT package (instructions.md + knowledge files)
   Gemini/*.md                                  # Google Gemini bot prompts (4 files)
@@ -207,11 +207,26 @@ Snyk is configured with always-on rules (`.github/instructions/snyk_rules.instru
 
 ---
 
+## Mono Prompt Versioning
+
+**Convention**: `InSites-CAA-mono-v{major}.{minor}.md` — two levels only.
+
+| Bump | When | Examples |
+|------|------|----------|
+| **Major** (v2→v3) | Structural change: new/removed stages, reorganized architecture, deployment freeze | Adding a Stage, removing an appendix, final workshop freeze |
+| **Minor** (v2.1→v2.2) | Content enhancement: new appendix entries, refined rules, added examples | Doc-tier patch, EAC enhancements, context-effect additions |
+
+**Before bumping**: Ask the user whether to version-bump or keep as-is. Do not auto-rename.
+
+**On bump**: Copy current version to `Claude/OLD/` (gitignored), rename file, update version line inside the file, update all references in `CLAUDE.md`.
+
+---
+
 ## Compaction Guidance
 
 When context is compacted, preserve:
 - Current task description and which files are being modified
-- Which bot prompt version is being edited (mono `InSites-CAA-mono-v2.0.md` vs skills-split `InSites-CAA.md`)
+- Which bot prompt version is being edited (mono `InSites-CAA-mono-v2.1.md` vs skills-split `InSites-CAA.md`)
 - Active platform target (Claude / GPT / Gemini / workshop-site)
 - Any cross-platform sync obligations triggered by the current edit
 
