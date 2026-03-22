@@ -222,6 +222,10 @@ Snyk is configured with always-on rules (`.github/instructions/snyk_rules.instru
 
 ---
 
+## Git Permissions
+
+Local git commands (commit, add, status, diff, log, branch, etc.) are auto-allowed in `.claude/settings.json`. Remote operations (push, pull, fetch) still require confirmation.
+
 ## Compaction Guidance
 
 When context is compacted, preserve:
