@@ -234,7 +234,7 @@ const getAgentChipTheme = (colorName: string) => {
 };
 
 // Toggle: true = slide-style opening + program, false = compact program only
-const USE_OPENING_VIEW = true;
+const USE_OPENING_VIEW = false;
 
 const App: React.FC = () => {
   const [selectedAgentId, setSelectedAgentId] = useState<number | null>(null);
