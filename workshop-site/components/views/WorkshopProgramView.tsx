@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, BookOpen, PenTool, MessageSquare, Presentation, Coffee, ChevronDown, ArrowRight, Users, Lightbulb, Eye, ShieldCheck } from 'lucide-react';
+import { Clock, BookOpen, PenTool, MessageSquare, Presentation, Coffee, ChevronDown, ArrowRight, Users, Lightbulb, Eye, ShieldCheck, Home } from 'lucide-react';
 import { SESSION_RESOURCES, LOOKING_GLASS_CARDS, CORE_AGENTS } from '../../constants';
 
 // ─── Schedule Data ────────────────────────────────────────────────
@@ -61,6 +61,14 @@ export const WorkshopProgramView: React.FC<WorkshopProgramViewProps> = ({ onNavi
 
         {/* Tab Bar */}
         <div className="flex gap-1.5 bg-slate-100 p-1 rounded-xl">
+          <button
+            onClick={() => onNavigate?.('home')}
+            className="flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-700 hover:bg-white/50 transition-all cursor-pointer"
+            title="Back to Home"
+          >
+            <Home size={14} />
+          </button>
+          <div className="w-px bg-slate-200 my-1" />
           {PROGRAM_TABS.map((tab) => (
             <button
               key={tab.id}
