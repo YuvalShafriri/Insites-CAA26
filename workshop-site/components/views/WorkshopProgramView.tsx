@@ -136,16 +136,16 @@ const ChallengesTab: React.FC = () => (
         alt="Atar.Bot — CBSA Workshop"
         className="w-full rounded-2xl border border-slate-200 shadow-sm"
       />
-      <p className="text-center text-sm text-slate-500 italic mt-2">
+      <p className="text-center text-base text-slate-500 italic mt-2">
         "The LLM is a looking glass — more than a wonderland"
       </p>
-      <p className="text-center text-xs text-slate-400 mt-1">
+      <p className="text-center text-sm text-slate-400 mt-1">
         CBSA and the transformer share a core idea: meaning emerges from context.
       </p>
     </div>
 
     {/* Intro line */}
-    <p className="text-sm text-slate-600 leading-relaxed">
+    <p className="text-base text-slate-600 leading-relaxed">
       AI already speaks our language and is becoming an active partner in culture. In this workshop, we examine how it can help with the assessment challenges:
     </p>
 
@@ -163,11 +163,11 @@ const ChallengesTab: React.FC = () => (
                 className="w-16 h-16 rounded-full border-2 border-white shadow-md shrink-0 object-cover"
                 onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
               />
-              <span className={`font-bold text-sm ${c.quote} flex-1`}>"{ch.quote}"</span>
+              <span className={`font-bold text-base ${c.quote} flex-1`}>"{ch.quote}"</span>
               <ChevronDown size={16} className="text-slate-400 group-open:rotate-180 transition-transform shrink-0" />
             </summary>
             <div className="px-4 pb-4 pt-1">
-              <p className={`text-sm ${c.text} leading-relaxed`}>{ch.response}</p>
+              <p className={`text-base ${c.text} leading-relaxed`}>{ch.response}</p>
             </div>
           </details>
         );
@@ -176,12 +176,12 @@ const ChallengesTab: React.FC = () => (
 
     {/* Lab intro */}
     <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
-      <h4 className="font-bold text-sm text-slate-800">InSites Knowledge Lab</h4>
-      <p className="text-xs text-slate-400">Technion — Israel Institute of Technology</p>
-      <p className="text-sm text-slate-700 leading-relaxed">
+      <h4 className="font-bold text-base text-slate-800">InSites Knowledge Lab</h4>
+      <p className="text-sm text-slate-400">Technion — Israel Institute of Technology</p>
+      <p className="text-base text-slate-700 leading-relaxed">
         At the intersection of <strong>assessment methods</strong>, <strong>novel technologies</strong>, and <strong>built-heritage data</strong> — we develop computational methods for evidence-based heritage assessment.
       </p>
-      <p className="text-sm text-slate-700 leading-relaxed">
+      <p className="text-base text-slate-700 leading-relaxed">
         Atar.Bot is our research prototype: a multi-platform AI assistant that structures heritage significance assessment through the CBSA method. Not a black box — a looking glass.
       </p>
     </div>
@@ -193,8 +193,8 @@ const ChallengesTab: React.FC = () => (
 const PrinciplesTab: React.FC<{ onNavigate?: (route: string) => void }> = ({ onNavigate }) => (
   <div className="space-y-4">
     <div>
-      <h3 className="text-xl font-black text-slate-800">Design Principles</h3>
-      <p className="text-xs text-slate-500 mt-0.5">How transparency, control, and evidence governance work in Atar.Bot</p>
+      <h3 className="text-2xl font-black text-slate-800">Design Principles</h3>
+      <p className="text-sm text-slate-500 mt-0.5">How transparency, control, and evidence governance work in Atar.Bot</p>
     </div>
     <DesignPrinciplesView onNavigate={onNavigate} />
   </div>
@@ -205,12 +205,12 @@ const PrinciplesTab: React.FC<{ onNavigate?: (route: string) => void }> = ({ onN
 const CbsaTab: React.FC<{ onNavigate?: (route: string) => void }> = ({ onNavigate }) => (
   <div className="space-y-5">
     <div>
-      <h3 className="text-xl font-black text-slate-800">Context-Based Significance Assessment</h3>
-      <p className="text-xs text-slate-500 mt-0.5">A structured heritage method — not a bot feature</p>
+      <h3 className="text-2xl font-black text-slate-800">Context-Based Significance Assessment</h3>
+      <p className="text-sm text-slate-500 mt-0.5">A structured heritage method — not a bot feature</p>
     </div>
 
     <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
-      <p className="text-sm text-slate-700 leading-relaxed">
+      <p className="text-base text-slate-700 leading-relaxed">
         CBSA is a values-based heritage assessment method. It structures the thinking process through 7 stages — each building on the previous — from data inventory to a synthesized significance statement. The method is platform-independent; the bot implements it.
       </p>
     </div>
@@ -221,8 +221,8 @@ const CbsaTab: React.FC<{ onNavigate?: (route: string) => void }> = ({ onNavigat
         <div className="flex items-center gap-2">
           <ArrowRight size={16} className="text-indigo-600 rotate-45" />
           <div>
-            <h4 className="font-bold text-sm text-indigo-900">Context Effect</h4>
-            <p className="text-[11px] text-indigo-600/70">The core CBSA principle — bidirectional, evaluative</p>
+            <h4 className="font-bold text-base text-indigo-900">Context Effect</h4>
+            <p className="text-xs text-indigo-600/70">The core CBSA principle — bidirectional, evaluative</p>
           </div>
         </div>
         <ChevronDown size={16} className="text-indigo-400 group-open:rotate-180 transition-transform shrink-0" />
