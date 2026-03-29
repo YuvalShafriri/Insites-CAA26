@@ -63,12 +63,13 @@ export const WorkshopProgramView: React.FC<WorkshopProgramViewProps> = ({ onNavi
         <div className="flex gap-1.5 bg-slate-100 p-1 rounded-xl">
           <button
             onClick={() => onNavigate?.('home')}
-            className="flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-slate-700 hover:bg-white/50 transition-all cursor-pointer"
+            className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs font-bold text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 transition-all cursor-pointer"
             title="Back to Home"
           >
             <Home size={14} />
+            <span className="hidden sm:inline">Home</span>
           </button>
-          <div className="w-px bg-slate-200 my-1" />
+          <div className="w-px bg-slate-300 my-1" />
           {PROGRAM_TABS.map((tab) => (
             <button
               key={tab.id}
@@ -243,24 +244,32 @@ const CbsaTab: React.FC<{ onNavigate?: (route: string) => void }> = ({ onNavigat
 
     {/* Two differentiators */}
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+      <button
+        onClick={() => onNavigate?.('governance')}
+        className="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-left hover:bg-emerald-100 hover:border-emerald-300 transition-all cursor-pointer group"
+      >
         <div className="flex items-center gap-2 mb-2">
           <ShieldCheck size={16} className="text-emerald-600" />
           <h4 className="font-bold text-sm text-emerald-900">Human-in-the-Loop</h4>
+          <ArrowRight size={12} className="text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
         </div>
         <p className="text-xs text-emerald-800/70 leading-relaxed">
           You approve every stage transition. The bot proposes analysis; you decide what stays, what changes, what's missing.
         </p>
-      </div>
-      <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-4">
+      </button>
+      <button
+        onClick={() => onNavigate?.('step-1')}
+        className="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-left hover:bg-indigo-100 hover:border-indigo-300 transition-all cursor-pointer group"
+      >
         <div className="flex items-center gap-2 mb-2">
           <ArrowRight size={16} className="text-indigo-600 rotate-45" />
           <h4 className="font-bold text-sm text-indigo-900">Context Effect</h4>
+          <ArrowRight size={12} className="text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
         </div>
         <p className="text-xs text-indigo-800/70 leading-relaxed">
           Bidirectional framing: contexts shape how we read significance, and recognized significance reframes the context itself.
         </p>
-      </div>
+      </button>
     </div>
   </div>
 );

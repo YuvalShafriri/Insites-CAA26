@@ -1450,7 +1450,7 @@ const App: React.FC = () => {
                           <Sparkles size={20} className="text-purple-600" />
                         </div>
                         <span className="text-xs font-bold text-slate-500">Claude</span>
-                        <span className="text-[9px] text-slate-400">Coming soon</span>
+                        <span className="text-[9px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">Coming soon</span>
                       </div>
                     </div>
                   </div>
@@ -1482,8 +1482,8 @@ const App: React.FC = () => {
                     <ResourceLink
                       onClick={() => navigateTo("presentation")}
                       icon={<Bot size={16} />}
-                      label="The Architect — Agent Builder"
-                      secondaryLabel="Build your own AI system instructions (Ethics in Practice)"
+                      label="The Architect (Workshop Activity)"
+                      secondaryLabel="Build your own AI system instructions — Ethics in Practice session"
                       highlight={true}
                       colorScheme="indigo"
                     />
