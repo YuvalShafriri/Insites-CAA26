@@ -13,6 +13,9 @@ Launch a simulated expert panel to review a target file from multiple profession
 - Before deploying a new bot prompt version
 - After major edits to check for blind spots
 - When reviewing artifacts (dashboards, KGs) for quality
+- When UpdTing the Bot Brain's stage specs or taxonomy
+- When UPDATING WORKSHOP-SITE CONTENT OR DESIGN
+- When UPDATING GITHUB DOCUMENTATION OR GUIDES FOR WORKSHOP PARTICIPANTS
 - When planning workshop content or session design
 - Any document that needs multi-perspective critique
 
@@ -28,8 +31,8 @@ Launch a simulated expert panel to review a target file from multiple profession
 | Expert | Focus | Best for |
 |--------|-------|----------|
 | **UX Designer** | Chat readability, visual rhythm, cognitive load, progressive disclosure, mobile | Bot prompts, artifacts, dashboards |
-| **Prompt QA Engineer** | Instruction conflicts, redundancy, Sonnet attention, missing guardrails, format examples | Bot prompts, system prompts |
-| **Heritage Pedagogy Expert** | CBSA methodology, time budget, energy curve, participant agency, HITL quality | Workshop content, session design |
+| **Prompt QA Engineer** | Instruction conflicts, redundancy, Sonnet attention, missing guardrails, format examples | Bot prompts, system prompts |etc.
+| **Heritage Pedagogy Expert** | CBSA methodology, time budget, energy curve, participant agency, HITL quality | Workshop content, session design |Heritage management and coverstion ethics
 | **Visual Communication Expert** | Information density, scanning aids, emojis, typography, table design | Artifacts, output formatting |
 | **Domain Expert** (heritage/archaeology) | Methodological precision, value taxonomy, evidence standards, terminology | CBSA content, assessment quality |
 
