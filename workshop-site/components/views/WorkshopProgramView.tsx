@@ -107,16 +107,19 @@ const CHALLENGES = [
     quote: "It's important but too complex",
     response: "With AI trained in our assessment principles, we can simplify the process and link outputs directly to surveys and systems.",
     color: 'amber',
+    avatar: '/hatter.png',
   },
   {
     quote: "It's too heavy, no one reads it",
     response: "With natural language queries and visual tools like knowledge graphs, we can make cultural insights clearer, usable, and even discover new ones.",
     color: 'indigo',
+    avatar: '/alice.png',
   },
   {
     quote: "So will AI replace the professionals?",
     response: "No. Experts remain essential. AI is a smart partner for detecting connections and contexts — but it needs our guidance.",
     color: 'emerald',
+    avatar: '/rabbit.png',
   },
 ];
 
@@ -138,6 +141,9 @@ const ChallengesTab: React.FC = () => (
       <p className="text-center text-sm text-slate-500 italic mt-2">
         "The LLM is a looking glass — more than a wonderland"
       </p>
+      <p className="text-center text-xs text-slate-400 mt-1">
+        CBSA and the transformer share a core idea: meaning emerges from context.
+      </p>
     </div>
 
     {/* Intro line */}
@@ -145,15 +151,22 @@ const ChallengesTab: React.FC = () => (
       AI already speaks our language and is becoming an active partner in culture. In this workshop, we examine how it can help with the assessment challenges:
     </p>
 
-    {/* 3 Challenge cards */}
+    {/* 3 Challenge cards with character avatars */}
     <div className="space-y-3">
       {CHALLENGES.map((ch, idx) => {
         const c = challengeColors[ch.color] || challengeColors.amber;
+        const isRight = idx % 2 === 0;
         return (
           <details key={idx} className={`${c.bg} border border-slate-200 ${c.border} border-l-4 rounded-xl overflow-hidden group`}>
-            <summary className="p-4 cursor-pointer flex items-center justify-between select-none">
-              <span className={`font-bold text-sm ${c.quote}`}>"{ch.quote}"</span>
-              <ChevronDown size={16} className="text-slate-400 group-open:rotate-180 transition-transform shrink-0 ml-2" />
+            <summary className={`p-4 cursor-pointer flex items-center gap-3 select-none ${isRight ? '' : 'flex-row-reverse'}`}>
+              <img
+                src={ch.avatar}
+                alt=""
+                className="w-10 h-10 rounded-full border-2 border-white shadow-sm shrink-0 object-cover"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
+              <span className={`font-bold text-sm ${c.quote} flex-1`}>"{ch.quote}"</span>
+              <ChevronDown size={16} className="text-slate-400 group-open:rotate-180 transition-transform shrink-0" />
             </summary>
             <div className="px-4 pb-4 pt-1">
               <p className={`text-sm ${c.text} leading-relaxed`}>{ch.response}</p>
@@ -161,6 +174,18 @@ const ChallengesTab: React.FC = () => (
           </details>
         );
       })}
+    </div>
+
+    {/* Lab intro */}
+    <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+      <h4 className="font-bold text-sm text-slate-800">InSites Knowledge Lab</h4>
+      <p className="text-xs text-slate-400">Technion — Israel Institute of Technology</p>
+      <p className="text-sm text-slate-700 leading-relaxed">
+        At the intersection of <strong>assessment methods</strong>, <strong>novel technologies</strong>, and <strong>built-heritage data</strong> — we develop computational methods for evidence-based heritage assessment.
+      </p>
+      <p className="text-sm text-slate-700 leading-relaxed">
+        Atar.Bot is our research prototype: a multi-platform AI assistant that structures heritage significance assessment through the CBSA method. Not a black box — a looking glass.
+      </p>
     </div>
   </div>
 );
