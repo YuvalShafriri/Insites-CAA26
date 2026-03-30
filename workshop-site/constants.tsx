@@ -85,7 +85,7 @@ Map the complex web of significance by identifying key entities, values, and con
 
 RULES:
 1. Return ONLY a valid JSON object.
-2. Structure: { "nodes": [ { "id": "string", "name": "Hebrew Display Name", "type": "English Type Token", "meaning": "Hebrew explanation (5-12 words)" } ], "edges": [ { "from": "id", "to": "id", "label": "relationship_verb" } ] }
+2. Structure: { "nodes": [ { "id": "string", "name": "Display Name", "type": "English Type Token", "meaning": "Explanation of heritage role (5-12 words)" } ], "edges": [ { "from": "id", "to": "id", "label": "relationship_verb" } ] }
 3. SELECTION LOGIC: Select 10-15 key nodes. Prioritize:
    - Entities carrying values (Value Carriers)
    - Major places/structures/events
@@ -97,7 +97,7 @@ RULES:
    - Human/Social: "person", "social_group", "religion"
    - Temporal/Events: "event", "historical_period", "collective_memory"
    - Cultural/Abstract: "cultural_value", "narrative", "tradition", "artwork"
-5. "meaning": Use Hebrew to explain the entity's heritage significance in this specific context.
+5. "meaning": Explain the entity's heritage significance in this specific context (match the input language).
 6. "label": Relationships should use lowercase English verbs (e.g., "located_in", "expresses", "commemorates").
 `;
 

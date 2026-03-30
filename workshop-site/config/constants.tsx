@@ -26,31 +26,31 @@ export const MODEL_NAME = 'gemini-3-flash-preview';
 
 export const DIALOGUE_PRINCIPLES = [
   {
-    title: "הגדרת זהות ומטרה",
-    description: "בכל פנייה, הגדירו לבוט תפקיד מקצועי (למשל: יועץ שימור או חוקר היסטורי). אל תשאלו שאלות כלליות, אלא הגדירו משימה ברורה מול נתוני האתר."
+    title: "Define Identity & Purpose",
+    description: "In every prompt, assign the bot a professional role (e.g., conservation advisor or historical researcher). Don't ask general questions — define a clear task against the site data."
   },
   {
-    title: "הזרקת הקשר מבוסס ראיות",
-    description: "העבירו לבוט רק עובדות שמצאתם בתיעוד (מאפיינים פיזיים, ציר זמן). אל תתנו לו 'להשלים פערים' מהידע הכללי שלו - כוונו אותו להשתמש במידע שהזרקתם."
+    title: "Inject Evidence-Based Context",
+    description: "Feed the bot only facts found in documentation (physical attributes, timeline). Don't let it 'fill gaps' from general knowledge — direct it to use only the data you provided."
   },
   {
-    title: "מנגנון בקרה ועצירה",
-    description: "דרשו מהבוט לתאר מה הבין מההנחיה ולחכות לאישורכם לפני תחילת העבודה. זהו הכלל החשוב ביותר למניעת הזיות נתונים (Hallucinations)."
+    title: "Control & Stop Mechanism",
+    description: "Require the bot to describe what it understood from the instruction and wait for your approval before starting work. This is the most important rule for preventing data hallucinations."
   }
 ];
 
 export const PROMPT_ADVISOR_SYSTEM = `
-אתה 'ארכיטקט דיאלוג' (Dialogue Architect) מומחה למורשת תרבותית. תפקידך לסייע לחוקר לנסח פנייה (Prompt) מקצועית עבור אתר.בוט המלא.
+You are a 'Dialogue Architect' expert in cultural heritage. Your role is to help a researcher formulate a professional prompt for the full InSites-CAA.
 
-עקרונות חובה:
-1. **ביקורתיות ומקצועיות**: אם המשתמש מבקש "המלצות", "שימור", "תוכנית עבודה" או החלטות סופיות על סמך מידע חלקי (כמו בדמו), **אסור** לספק פנייה שמבטיחה זאת. זה לא מקצועי. במקום זאת, נסח פנייה שמבקשת "זיהוי ערכים", "מיפוי רגישויות", "ניתוח משמעויות" או "העלאת דילמות" כתמיכה בקבלת החלטות.
-2. **מבנה הפלט**: הפלט שלך חייב להיות מופרד לשני חלקים בדיוק כך (השתמש במפריד המדויק):
+Mandatory principles:
+1. **Criticality & Professionalism**: If the user asks for "recommendations", "conservation plans", or final decisions based on partial information (as in the demo), you **must not** provide a prompt that promises these. Instead, formulate a prompt that asks for "value identification", "sensitivity mapping", "meaning analysis", or "raising dilemmas" to support decision-making.
+2. **Output structure**: Your output must be separated into exactly two parts as follows (use the exact separator):
 
-[תוכן הפרומפט להעתקה בלבד]
+[Prompt content for copying only]
 ---PROMPT_BOUNDARY---
-[הסבר קצר למשתמש (בעברית) על הבחירה המקצועית שעשית בפרומפט, ומדוע]
+[Brief explanation to the user about the professional choice you made in the prompt, and why]
 
-3. **הפרומפט להעתקה**: חייב להיות קצר, מקצועי, ללא כותרות, פונה לבוט בגוף שני ("פעל כיועץ..."), ומסתיים בשאלת עצירה.
+3. **The prompt for copying**: Must be short, professional, without headings, address the bot in second person ("Act as an advisor..."), and end with a stop question.
 `;
 // Re-export sample texts from sampleTexts.ts
 export { DEMO_DATA, ZAIRA_TEXT, AYELET_WT_TEXT } from './sampleTexts';
@@ -85,7 +85,7 @@ Map the complex web of significance by identifying key entities, values, and con
 
 RULES:
 1. Return ONLY a valid JSON object.
-2. Structure: { "nodes": [ { "id": "string", "name": "Hebrew Display Name", "type": "English Type Token", "meaning": "Hebrew explanation (5-12 words)" } ], "edges": [ { "from": "id", "to": "id", "label": "relationship_verb" } ] }
+2. Structure: { "nodes": [ { "id": "string", "name": "Display Name", "type": "English Type Token", "meaning": "Explanation of heritage role (5-12 words)" } ], "edges": [ { "from": "id", "to": "id", "label": "relationship_verb" } ] }
 3. SELECTION LOGIC: Select 10-15 key nodes. Prioritize:
    - Entities carrying values (Value Carriers)
    - Major places/structures/events
@@ -97,7 +97,7 @@ RULES:
    - Human/Social: "person", "social_group", "religion"
    - Temporal/Events: "event", "historical_period", "collective_memory"
    - Cultural/Abstract: "cultural_value", "narrative", "tradition", "artwork"
-5. "meaning": Use Hebrew to explain the entity's heritage significance in this specific context.
+5. "meaning": Explain the entity's heritage significance in this specific context (match the input language).
 6. "label": Relationships should use lowercase English verbs (e.g., "located_in", "expresses", "commemorates").
 `;
 
@@ -283,21 +283,21 @@ export const PROMPT_TRANSLATIONS: Record<number, string> = {
 };
 
 export const CORE_AGENTS: AgentConfig[] = [
-  { id: 0, name: "0 - בדיקת מידע מקדימה", role: "בדיקת פערי המידע שהועלה", color: "slate", icon: <ShieldCheck size={20} /> },
-  { id: 1, name: "1 - תיאור והקשרים", role: "תיאור, ציר זמן וניתוח הקשרים", color: "blue", icon: <Network size={20} /> },
-  { id: 2, name: "2 - ניתוח הערכים", role: "זיהוי משמעות וערכי מורשת", color: "amber", icon: <Gem size={20} /> },
-  { id: 3, name: "3 - מבחן האותנטיות והשלמות", role: "אותנטיות ומצב פיזי", color: "emerald", icon: <Puzzle size={20} /> },
-  { id: 4, name: "4 - השוואה לנכסים אחרים", role: "קריטריוני השוואה ביחס לנכסים אחרים", color: "indigo", icon: <Scale size={20} /> },
-  { id: 5, name: "5 - סינתזה והצהרת משמעות", role: "גיבוש הצהרת משמעות", color: "purple", icon: <Scroll size={20} /> },
-  { id: 6, name: "6 - בקרת איכות התהליך ", role: "ביקורת לוגית וסיכום פערים", color: "rose", icon: <SearchCheck size={20} /> }
+  { id: 0, name: "0 - Pre-check & Data Inventory", role: "Verify data gaps in uploaded material", color: "slate", icon: <ShieldCheck size={20} /> },
+  { id: 1, name: "1 - Description & Contexts", role: "Description, timeline & context analysis", color: "blue", icon: <Network size={20} /> },
+  { id: 2, name: "2 - Value Analysis", role: "Identify heritage values & meanings", color: "amber", icon: <Gem size={20} /> },
+  { id: 3, name: "3 - Authenticity & Integrity", role: "Authenticity and physical condition", color: "emerald", icon: <Puzzle size={20} /> },
+  { id: 4, name: "4 - Comparative Evaluation", role: "Comparison criteria vs. other assets", color: "indigo", icon: <Scale size={20} /> },
+  { id: 5, name: "5 - Synthesis & Significance", role: "Formulate significance statement", color: "purple", icon: <Scroll size={20} /> },
+  { id: 6, name: "6 - Quality Audit", role: "Logic review and gap summary", color: "rose", icon: <SearchCheck size={20} /> }
 ];
 
 export const SUPPORT_AGENTS: SupportAgent[] = [
-  { id: 'img', name: "ניתוח חזותי", icon: <Box size={16} /> },
-  { id: 'know', name: "גרף ידע", icon: <Zap size={16} /> },
-  { id: 'narr', name: "נרטיבים חלופיים", icon: <BookOpen size={16} /> },
-  { id: 'coll', name: "ניתוח אוסף", icon: <Library size={16} /> },
-  { id: 'sent', name: "ערכי קהילה וסנטימנט", icon: <MessageSquare size={16} /> },
+  { id: 'img', name: "Visual Analysis", icon: <Box size={16} /> },
+  { id: 'know', name: "Knowledge Graph", icon: <Zap size={16} /> },
+  { id: 'narr', name: "Alternative Narratives", icon: <BookOpen size={16} /> },
+  { id: 'coll', name: "Collection Analysis", icon: <Library size={16} /> },
+  { id: 'sent', name: "Community Values & Sentiment", icon: <MessageSquare size={16} /> },
 ];
 
 export const STEP_DETAILS: Record<number, {
@@ -305,130 +305,147 @@ export const STEP_DETAILS: Record<number, {
   whatHappens: string[];
   cognitiveLink: string;
   promptSummary: string;
+  featureSpotlight?: { title: string; description: string };
   extensions?: { name: string; url: string; description: string }[];
 }> = {
   0: {
-    whyImportant: "שלב זה משמש כ'שער כניסה' - מוודא שיש מספיק מידע לפני שמתחילים בניתוח. מניעת ניתוח על בסיס מידע חסר או לא מבוסס.",
+    whyImportant: "This stage serves as a 'gateway' — ensuring there is enough data before analysis begins. Prevents analysis based on missing or unfounded information.",
     whatHappens: [
-      "סריקת החומרים שהועלו לזיהוי סוג ומקור",
-      "רשימת בדיקה של 6 נקודות: מיקום, תפקוד, ציר זמן, הקשרים, תיאור פיזי, ממצאים",
-      "זיהוי פערי מידע ספציפיים וסיווגם",
-      "הצעות קונקרטיות להשלמת מידע חסר"
+      "Scan uploaded materials to identify type and source",
+      "Checklist of 6 points: location, function, timeline, contexts, physical description, findings",
+      "Identify specific data gaps and classify them",
+      "Concrete suggestions for completing missing information"
     ],
-    cognitiveLink: "נקודת פתיחה - אין שלבים קודמים. פערים שמזוהים כאן יסומנו לאורך כל התהליך.",
-    promptSummary: "סרוק את החומרים, בדוק 6 קטגוריות חובה, רשום פערים ספציפיים, והצע מקורות להשלמה."
+    cognitiveLink: "Starting point — no prior stages. Gaps identified here will be flagged throughout the entire process.",
+    promptSummary: "Scan the materials, check 6 mandatory categories, list specific gaps, and suggest sources for completion."
   },
   1: {
-    whyImportant: "בונה את המסגרת הפרשנית - איפה, מתי, ובאילו יחסים הנכס קיים. זהו הבסיס לכל הניתוח שיבוא.",
+    whyImportant: "Builds the interpretive framework — where, when, and in what relationships the asset exists. This is the foundation for all subsequent analysis.",
     whatHappens: [
-      "תיאור נרטיבי של הנכס (~280 מילים)",
-      "בניית ציר זמן מפורט עם מקורות",
-      "זיהוי הקשרים חשובים (למשל: גאוגרפי, היסטורי, חברתי, טכנולוגי)",
-      "הפעלת עקרון 'אפקט ההקשר' - איך ההקשר מסגר משמעות ולהיפך"
+      "Narrative description of the asset (~280 words)",
+      "Build a detailed timeline with sources",
+      "Identify key contexts (e.g., geographic, historical, social, technological)",
+      "Apply 'Context Effect' principle — how context frames meaning and vice versa"
     ],
-    cognitiveLink: "בונה על שלב 0: משתמש בחומרים שנסרקו, מסמן פערים שזוהו בציר הזמן.",
-    promptSummary: "תאר את הנכס, בנה ציר זמן, נתח הקשרים דו-כיווניים והגדר קשרים ספציפיים לאתר."
+    cognitiveLink: "Builds on Stage 0: uses scanned materials, flags gaps identified in the timeline.",
+    promptSummary: "Describe the asset, build a timeline, analyze bidirectional contexts and define site-specific relationships.",
+    featureSpotlight: {
+      title: "↔ Context Effect — Bidirectional Analysis",
+      description: "How context frames the asset AND how the asset reframes the context. Planning implications flagged with 🧭 and collected in Stage 6."
+    }
   },
   2: {
-    whyImportant: "הליבה של הערכת המשמעות - מתרגם את ההקשרים והמאפיינים הפיזיים למשמעויות תרבותיות מוגדרות.",
+    whyImportant: "The core of significance assessment — translates contexts and physical attributes into defined cultural meanings.",
     whatHappens: [
-      "זיהוי ערכי האתר המשמעותיים (למשל: היסטורי, אסתטי, חברתי, טכנולוגי)",
-      "לכל ערך: ראיות (מאפיינים) → הקשר → ערך → משמעות",
-      "בניית טבלת מאפיין-ערך-משמעות-השלכה (מה יקרה אם הערך ייפגע)",
-      "זיהוי דינמיקת ערכים: לכידות או מתח?"
+      "Identify significant site values (e.g., historical, aesthetic, social, technological)",
+      "For each value: evidence (attributes) → context → value → meaning",
+      "Build an attribute-value-meaning-consequence table (what happens if the value is harmed)",
+      "Identify value dynamics: cohesion or tension?"
     ],
-    cognitiveLink: "הקשרים משלב 1 הופכים ל'עדשות' דרכן מזהים ערכים. ציר הזמן מזין ערכים היסטוריים.",
-    promptSummary: "זהה ערכי מורשת, בנה טבלת מאפיינים-ערכים, ונתח דינמיקה בין הערכים השונים."
+    cognitiveLink: "Contexts from Stage 1 become 'lenses' through which values are identified. The timeline feeds historical values.",
+    promptSummary: "Identify heritage values, build an attribute-value table, and analyze dynamics between different values.",
+    featureSpotlight: {
+      title: "Evidence Strength Marking",
+      description: "Values marked by evidence tier: explicit (sourced), inferred°, uncertain💭. The attribute table shows what's at stake if each attribute is compromised."
+    }
   },
   3: {
-    whyImportant: "בודק את מצב העדויות בשטח - שלמותן (אינטגריטי) ואותנטיות (קרבה למקור). האם המאפיינים עדיין קיימים ויכולים לבטא את הערכים?",
+    whyImportant: "Examines the state of evidence on the ground — integrity and authenticity (proximity to the original). Do the attributes still exist and can they express the values?",
     whatHappens: [
-      "טבלת NARA: צורה, חומר, שימוש, סביבה",
-      "דירוג לכל היבט: גבוה / בינוני / נמוך / אבוד",
-      "קישור כל היבט לערכים משלב 2",
-      "זיהוי מה נשמר, מה השתנה, מה אבד"
+      "NARA Grid: form, material, use, setting",
+      "Grading for each aspect: High / Medium / Low / Lost",
+      "Link each aspect to values from Stage 2",
+      "Identify what is preserved, what changed, what was lost"
     ],
-    cognitiveLink: "שואל: האם העדויות הפיזיות עדיין מאפשרות לבטא את הערכים משלב 2? ציר הזמן משלב 1 מסביר מתי התרחשו שינויים.",
-    promptSummary: "בנה טבלת נארה, דרג אותנטיות לכל היבט, וקשר בחזרה לערכים שזוהו."
+    cognitiveLink: "Asks: Do the physical evidences still allow expressing the values from Stage 2? The timeline from Stage 1 explains when changes occurred.",
+    promptSummary: "Build a Nara Grid, grade authenticity for each aspect, and link back to identified values.",
+    featureSpotlight: {
+      title: "Vulnerability Matrix",
+      description: "Cross-tabulates values × Nara aspects → impact levels. Available in the assessment dashboard for interactive exploration."
+    }
   },
   4: {
-    whyImportant: "מכייל את המשמעות - האם הנכס ייחודי או נציג? באיזה קנה מידה: מקומי, אזורי, לאומי?",
+    whyImportant: "Calibrates significance — is the asset unique or representative? At what scale: local, regional, national?",
     whatHappens: [
-      "זיהוי נכסי השוואה רלוונטיים (לפחות 2)",
-      "מטריצת השוואה: תקופה, נדירות, תיעוד, מצב",
-      "ניתוח מה מייחד את הנכס ביחס להשוואות",
-      "כיול רמת המשמעות: מקומית, אזורית, לאומית"
+      "Identify relevant comparable assets (at least 2)",
+      "Comparison matrix: period, rarity, documentation, condition",
+      "Analyze what distinguishes the asset relative to comparisons",
+      "Calibrate significance level: local, regional, national"
     ],
-    cognitiveLink: "האם הערכים משלב 2 מתבטאים כאן יותר/פחות מבנכסים דומים? האם האותנטיות משלב 3 מייחדת?",
-    promptSummary: "השווה לנכסים דומים, נתח קריטריונים, והגדר את הייחודיות של הנכס."
+    cognitiveLink: "Are the values from Stage 2 expressed here more/less than in similar assets? Does the authenticity from Stage 3 set it apart?",
+    promptSummary: "Compare to similar assets, analyze criteria, and define the asset's uniqueness."
   },
   5: {
-    whyImportant: "מאחד את כל הניתוח לנרטיב משמעות קוהרנטי - התשובה לשאלה 'למה ומה לשמר?'",
+    whyImportant: "Unites all analysis into a coherent significance narrative — the answer to 'why and what to conserve?'",
     whatHappens: [
-      "הצהרת משמעות של 3-5 פסקאות (~300 מילים)",
-      "שזירת הקשרים, ערכים, אותנטיות וייחודיות",
-      "ניתוח לכידות - כיצד המרכיבים יוצרים משמעות ביחד",
-      "הצעת מסלולים אופציונליים להעמקה"
+      "Significance statement of 3-5 paragraphs (~300 words)",
+      "Weave together contexts, values, authenticity and uniqueness",
+      "Coherence analysis — how the components create meaning together",
+      "Propose optional tracks for deeper exploration"
     ],
-    cognitiveLink: "נקודת המפגש של שלבים 1-4. לא סיכום - אלא סינתזה שמראה איך האלמנטים יוצרים משמעות ביחד.",
-    promptSummary: "כתוב הצהרת משמעות שמשלבת את כל השלבים הקודמים לנרטיב אחד קוהרנטי.",
+    cognitiveLink: "The meeting point of Stages 1-4. Not a summary — but a synthesis showing how elements create meaning together.",
+    promptSummary: "Write a significance statement that integrates all previous stages into one coherent narrative.",
     extensions: [
-      { name: "גרף ידע", url: "graph-create", description: "מיפוי ישויות וקשרים" },
-      { name: "קריאה סמיוטית", url: "q-semiotics", description: "סמלים וקודים תרבותיים" },
-      { name: "נרטיבים חלופיים", url: "q-narratives", description: "פרשנויות ונקודות מבט" },
-      { name: "תכנון פעילויות באתר", url: "q-education", description: "חינוך וקהילה" },
-      { name: "ערכי קהילה", url: "q-sentiment", description: "סנטימנט ומחזיקי עניין" },
-      { name: "ליצן החצר", url: "q-jester", description: "אתגור הנחות יסוד" }
+      { name: "Knowledge Graph", url: "graph-create", description: "Entity and relationship mapping" },
+      { name: "Semiotic Reading", url: "q-semiotics", description: "Symbols and cultural codes" },
+      { name: "Alternative Narratives", url: "q-narratives", description: "Interpretations and perspectives" },
+      { name: "Site Activity Planning", url: "q-education", description: "Education and community" },
+      { name: "Community Values", url: "q-sentiment", description: "Sentiment and stakeholders" },
+      { name: "Court Jester", url: "q-jester", description: "Challenge core assumptions" }
     ]
   },
   6: {
-    whyImportant: "וידוא שההערכה הייתה קפדנית ושקופה. זיהוי חוזקות ופערים - לא המלצות לשימור!",
+    whyImportant: "Ensures the assessment was rigorous and transparent. Identifies strengths and gaps — not conservation recommendations!",
     whatHappens: [
-      "סיכום חוזקות ההערכה (2-3 משפטים)",
-      "טבלת שיפורים קטנים (עד 3 שורות)",
-      "צעדים הבאים קונקרטיים (1-2)",
-      "הערת פרקטיקה מקצועית"
+      "Summary of assessment strengths (2-3 sentences)",
+      "Small improvements table (up to 3 rows)",
+      "Concrete next steps (1-2)",
+      "Professional practice note"
     ],
-    cognitiveLink: "בודק: האם הסינתזה משלב 5 נתמכת? האם היינו קפדניים לאורך כל השלבים? האם צריך לחזור?",
-    promptSummary: "בצע ביקורת על התהליך, זהה נקודות חוזק וחולשה, והצע צעדים הבאים."
+    cognitiveLink: "Checks: Is the synthesis from Stage 5 supported? Were we rigorous throughout all stages? Do we need to go back?",
+    promptSummary: "Audit the process, identify strengths and weaknesses, and suggest next steps.",
+    featureSpotlight: {
+      title: "Session Debrief & Trust Profile",
+      description: "After quality check: 3 reflection questions + interaction map create a research-grade record of your collaboration with the bot."
+    }
   }
 };
 
 // Node type translations for Knowledge Graph
 export const TYPE_HE: Record<string, string> = {
   // Physical
-  site: 'אתר מורשת',
-  place: 'מקום',
-  structure: 'מבנה',
-  architectural_element: 'אלמנט אדריכלי',
-  natural_phenomenon: 'תופעת טבע',
+  site: 'Heritage Site',
+  place: 'Place',
+  structure: 'Structure',
+  architectural_element: 'Architectural Element',
+  natural_phenomenon: 'Natural Phenomenon',
   // Social
-  person: 'אישיות',
-  social_group: 'קבוצה חברתית',
-  religion: 'דת/אמונה',
+  person: 'Person',
+  social_group: 'Social Group',
+  religion: 'Religion/Belief',
   // Time/Event
-  period: 'תקופה',
-  event: 'אירוע',
-  historical_period: 'תקופה היסטורית',
-  collective_memory: 'זיכרון קולקטיבי',
+  period: 'Period',
+  event: 'Event',
+  historical_period: 'Historical Period',
+  collective_memory: 'Collective Memory',
   // Abstract
-  value: 'ערך',
-  cultural_value: 'ערך תרבותי',
-  narrative: 'נרטיב',
-  tradition: 'מסורת',
-  artwork: 'יצירת אמנות',
+  value: 'Value',
+  cultural_value: 'Cultural Value',
+  narrative: 'Narrative',
+  tradition: 'Tradition',
+  artwork: 'Artwork',
   // Fallback
-  physical: 'פיזי',
-  default: 'כללי'
+  physical: 'Physical',
+  default: 'General'
 };
 
 // Educational prompt for AI explanation
-export const EDUCATIONAL_PROMPT = `👤 **תפקיד:** כמומחה לתחום הערכה תרבותית וגם לבינה מלאכותית יוצרת (Gen AI).
-🎯 **מטרה:** להסביר למשתתפי הסדנה מהו מודל שפה גדול (LLM) ואיך הוא שונה מחשיבה אנושית בהערכת מורשת.
-📝 **משימות:**
-1. הסבר איך מודל שפה מנסה להבין "משמעות" של נכס מורשת (למשל 'מגדל מים') דרך סטטיסטיקה וניבוי מילים, לעומת הדרך שבה חוקר אנושי מפרש אותו כצומת של זיכרונות, זהות והקשרים פיזיים.
-2. השתמש במושג "אפקט ההקשר" (Context Effect) כדי להראות איך הבינה המלאכותית יכולה לעזור לחלץ הקשרים אבל רק האדם יכול להעניק להם ערך תרבותי.
-🌀 **תוספת רפלקטיבית:** אילו 3 שאלות אתה מציע שאשאל את עצמי בכל פעם שאני מקבל ממך (הבוט) ניתוח ערכים, כדי לוודא שלא איבדתי את "הקול המקצועי" שלי?`;
+export const EDUCATIONAL_PROMPT = `**Role:** As an expert in cultural assessment and Generative AI.
+**Goal:** Explain to workshop participants what a Large Language Model (LLM) is and how it differs from human thinking in heritage assessment.
+**Tasks:**
+1. Explain how a language model tries to understand the "meaning" of a heritage asset (e.g., 'water tower') through statistics and word prediction, versus how a human researcher interprets it as a nexus of memories, identity, and physical contexts.
+2. Use the concept of "Context Effect" to show how AI can help extract contexts, but only humans can assign cultural value.
+**Reflective addition:** What 3 questions do you suggest I ask myself every time I receive a value analysis from you (the bot), to ensure I haven't lost my "professional voice"?`;
 
 // MA-RC Instructions for collection analysis
 export const MARC_INSTRUCTIONS = {
@@ -483,102 +500,102 @@ Mandatory Stop Prompts:
 export const RESEARCH_QUERIES = [
   {
     route: 'q-narratives',
-    title: "נרטיבים חלופיים",
-    description: "בחינת האתר דרך עיניים של בעלי עניין שונים.",
+    title: "Alternative Narratives",
+    description: "Examine the site through the eyes of different stakeholders.",
     icon: <Users size={16} />,
-    prompt: `פעל כחוקר מורשת בגישת 'ניהול מבוסס-ערכים' (Values-Based Management) ומתודולוגיית CBSA, המקדמת **רב-קוליות** (Polyvocality) בתהליכי שימור.
+    prompt: `Act as a heritage researcher using a 'Values-Based Management' approach and CBSA methodology, promoting **Polyvocality** in conservation processes.
 
-המשימה: נתח את האתר דרך 'עדשות' של 3 קבוצות זהות או בעלי עניין שונים ומובהקים (למשל: תושבים ותיקים, יזם פיתוח, דמות היסטורית, או סופר שיצירתו מהדהדת את המקום).
+Task: Analyze the site through the 'lenses' of 3 distinct identity groups or stakeholders (e.g., long-time residents, a developer, a historical figure, or an author whose work resonates with the place).
 
-עבור כל קבוצה, נתח:
-1. שיקוף ערכי: מהם ערכי המורשת המרכזיים שקבוצה זו מייחסת לאתר? (למשל: ערך חברתי, סמלי, כלכלי, או זהותי).
-2. מוקדי מתח: היכן הפרשנות שלהם מתנגשת עם נרטיבים של קבוצות אחרות?
-3. תפקיד המרחב: כיצד האתר הפיזי משמש כ**גשר** (מחבר בין הזהויות) או כ**חסם** (מנציח את הקונפליקט)?
+For each group, analyze:
+1. Value reflection: What are the core heritage values this group attributes to the site? (e.g., social, symbolic, economic, or identity value).
+2. Tension points: Where does their interpretation clash with narratives of other groups?
+3. Role of space: How does the physical site serve as a **bridge** (connecting identities) or a **barrier** (perpetuating conflict)?
 
-סיכום: הצג תובנה אינטגרטיבית על הפוטנציאל להכלה (Inclusion) של הנרטיבים השונים באתר.`
+Summary: Present an integrative insight on the potential for inclusion of the different narratives at the site.`
   },
   {
     route: 'q-sentiment',
-    title: "סנטימנט קהילתי",
-    description: "ניתוח סנטימנט וערכי קהילה.",
+    title: "Community Sentiment",
+    description: "Sentiment and community values analysis.",
     icon: <MessageCircle size={16} />,
-    prompt: `פעל כנתח סנטימנט וערכים קהילתיים.
-משימה: מתוך הטקסט המצורף, חלץ את "מפת הערכים החברתיים".
-חפש מילות מפתח רגשיות, זיכרונות משותפים, ותיאורי שימוש יומיומיים.
-הצג בטבלה: [מובאה מהטקסט] | [ערך חברתי שזהה] | [עוצמת הקשר הרגשי].
-סיכום: מהו ה"רוח של המקום" (Genius Loci) כפי שהקהילה תופסת אותו?`
+    prompt: `Act as a community sentiment and values analyst.
+Task: From the attached text, extract the "social values map."
+Look for emotional keywords, shared memories, and descriptions of everyday use.
+Present in a table: [Quote from text] | [Social value identified] | [Emotional connection strength].
+Summary: What is the "Spirit of the Place" (Genius Loci) as perceived by the community?`
   },
   {
     route: 'q-education',
-    title: "המסרה וחינוך",
-    description: "הצעות לפעילויות ותכנים באתר המבוססים על ערכי המורשת שזוהו.",
+    title: "Interpretation & Education",
+    description: "Proposals for site activities based on identified heritage values.",
     icon: <Footprints size={16} />,
-    prompt: `פעל כצוות של מתכנן בכיר להמסרת מורשת (Heritage Interpretation) ומפתח פעילויות למידה בהתמחות למידה בשטח.
-המשימה: גיבוש 3 קונספטים לפעילות חווייתית-חינוכית באתר, המנכיחים את 'הצהרת המשמעות' ואת מאפייני האתר שזיהינו.
+    prompt: `Act as a team of a senior Heritage Interpretation planner and a learning activity developer specializing in on-site learning.
+Task: Develop 3 concepts for experiential-educational activities at the site, bringing to life the 'Significance Statement' and the site attributes we identified.
 
-תהליך העבודה:
-1. איסוף נתונים (שלב מקדים): לפני הצגת הרעיונות, שאל אותי לגבי המאפיינים הפיזיים של האתר שיש לקחת בחשבון, מצב השימור הנוכחי ואילוצים ניהוליים/אחרים שיש לקחת בחשבון. המתן לתשובתי.
-2. פיתוח ההצעות: על בסיס תשובתי, פתח 3 הצעות המשלבות למידה פעילה (Learning by Doing) וממשק פיזי-דיגיטלי (Phygital) המותאם לאופי האתר או רעיון יצירתי אחר לא מוגבל.
+Work process:
+1. Data gathering (preliminary): Before presenting ideas, ask me about the site's physical characteristics to consider, current conservation status, and management/other constraints. Wait for my response.
+2. Proposal development: Based on my response, develop 3 proposals combining active learning (Learning by Doing) and physical-digital interface (Phygital) suited to the site's character, or other creative ideas.
 
-מבנה כל הצעה:
-• הערך המוביל: איזה ערך/ים מורשת ספציפי/ם (מתוך הניתוח הקודם) הפעילות 'מפעילה'?
-• פרופיל החוויה: קהל היעד, המטרה הפדגוגית והרגש המרכזי שיוצרת הפעילות.
-• תיאור הפעילות: מה המבקר עושה בפועל? (חיבור בין המרחב הפיזי לתוכן).
-• היבטים תכנוניים: דרישות פיזיות/תשתיות נדרשות באתר למימוש הפעילות.
-• היתכנות: הערכת משאבים נדרשת (תקציב/תפעול).
+Structure for each proposal:
+• Leading value: Which specific heritage value(s) (from previous analysis) does the activity 'activate'?
+• Experience profile: Target audience, pedagogical goal, and the central emotion the activity creates.
+• Activity description: What does the visitor actually do? (Connection between physical space and content).
+• Planning aspects: Physical/infrastructure requirements at the site.
+• Feasibility: Resource assessment (budget/operations).
 
-תשתדל שהתגובות שלך יהיו קצרות באופן אופטימלי.`
+Keep your responses optimally concise.`
   },
   {
     route: 'q-semiotics',
-    title: "ניתוח סמיוטי",
-    description: "פענוח סמלים, קודים תרבותיים ומטאפורות בנכס המורשת.",
+    title: "Semiotic Analysis",
+    description: "Decode symbols, cultural codes, and metaphors in the heritage asset.",
     icon: <Fingerprint size={16} />,
-    prompt: `פעל כמומחה לסמיוטיקה תרבותית.
-משימה: בצע "קריאה סמיוטית" של האתר.
-זהה 3 אלמנטים (פיזיים או מופשטים) המתפקדים כ"סימנים" תרבותיים.
-עבור כל סימן:
-1. מהו המסמן (האלמנט הפיזי)?
-2. מהו המסומל (המשמעות התרבותית/המטאפורה)?
-3. כיצד הקוד התרבותי הזה השתנה לאורך זמן (דיאכרוניה)?`
+    prompt: `Act as a cultural semiotics expert.
+Task: Perform a "semiotic reading" of the site.
+Identify 3 elements (physical or abstract) that function as cultural "signs."
+For each sign:
+1. What is the signifier (the physical element)?
+2. What is the signified (the cultural meaning/metaphor)?
+3. How has this cultural code changed over time (diachrony)?`
   },
   {
     route: 'q-jester-chorus',
-    title: "ליצן החצר / מקהלה יוונית",
-    description: "קולות רפלקטיביים לבחינת התהליך: ליצן החצר המערער והמקהלה המפרשת.",
+    title: "Court Jester / Greek Chorus",
+    description: "Reflective voices for examining the process: the subversive Jester and the interpreting Chorus.",
     icon: <Drama size={16} />,
     subQueries: [
       {
         route: 'q-jester',
-        title: "ליצן החצר",
-        description: "אתגור הנחות יסוד באמצעות שאלות פרובוקטיביות.",
+        title: "Court Jester",
+        description: "Challenge core assumptions through provocative questions.",
         icon: <Smile size={16} />,
-        prompt: `פעל כ"ליצן החצר" ברוח מתודולוגיית CBSA.
-תפקידך: לאתגר את הניתוח מבפנים בקול חתרני–משחקי, ולחשוף סתירות, ביטחון־יתר והנחות נסתרות — מבלי להוסיף עובדות.
-פעל כך:
-1. ערער על ניסוחים בטוחים מדי ("האומנם?").
-2. הצבע על סתירות פנימיות או אבסורדים שהניתוח מנסה להחליק.
-3. חשוף הנחות סמויות שלא נאמרו במפורש.
-4. השתמש בהיפוך, אירוניה ושאלה חדה.
-מה לא לעשות: אל תוסיף מידע או הקשרים, אל תציע ניתוח חלופי, ואל תדבר בשפה סמכותית.
-טון: חד, שובב, לא רשמי אך אינטליגנטי. מותר להגזים מעט כדי לחשוף אמת.
-סיום: סיים באמירה או שאלה שמערערת את הוודאות הקיימת.`
+        prompt: `Act as "The Court Jester" in the spirit of CBSA methodology.
+Your role: Challenge the analysis from within using a subversive-playful voice, exposing contradictions, overconfidence, and hidden assumptions — without adding facts.
+Do this:
+1. Challenge overly safe phrasings ("Is that really so?").
+2. Point out internal contradictions or absurdities the analysis tries to smooth over.
+3. Expose hidden assumptions not explicitly stated.
+4. Use reversal, irony, and sharp questions.
+What NOT to do: Don't add information or contexts, don't propose alternative analysis, don't speak authoritatively.
+Tone: Sharp, playful, informal yet intelligent. Slight exaggeration is allowed to reveal truth.
+Ending: End with a statement or question that unsettles existing certainty.`
       },
       {
         route: 'q-chorus',
-        title: "מקהלה יוונית",
-        description: "ליווי פרשני-ציבורי המאיר בחירות ומתחים ערכיים.",
+        title: "Greek Chorus",
+        description: "Interpretive-public accompaniment illuminating choices and value tensions.",
         icon: <Users size={16} />,
-        prompt: `פעל כ"קול המקהלה היוונית" ברוח מתודולוגיית CBSA.
-תפקידך: ללוות את הפלט הקיים בקול פרשני–ציבורי מודע, מבלי להוסיף מידע חדש ומבלי להכריע.
-פעל כך:
-1. הצבע על מעברים מתיאור למשמעות.
-2. האר בחירות ניסוח שקטות והנחות מובלעות.
-3. סמן מתחים ערכיים או מוקדי רגישות.
-4. התייחס למשמעות של אופן הניסוח, לא לנכונות העובדות.
-מה לא לעשות: אל תוסיף ראיות, הקשרים או פרשנות חדשה. אל תציע ניסוח חלופי מלא, ואל תקבע מה נכון או שגוי.
-טון: זהיר, ציבורי, מודע לעצמו. השתמש בניסוחים מסייגים ("כך זה עשוי להישמע", "יש כאן בחירה").
-סיום: סיים תמיד בשאלת עצירה פתוחה שמחזירה את האחריות למשתמש.`
+        prompt: `Act as "The Greek Chorus Voice" in the spirit of CBSA methodology.
+Your role: Accompany the existing output with a conscious interpretive-public voice, without adding new information and without deciding.
+Do this:
+1. Point out transitions from description to meaning.
+2. Illuminate quiet phrasing choices and embedded assumptions.
+3. Flag value tensions or sensitivity points.
+4. Address the meaning of how things are phrased, not the correctness of facts.
+What NOT to do: Don't add evidence, contexts, or new interpretation. Don't propose full alternative phrasing, and don't determine what is right or wrong.
+Tone: Careful, public, self-aware. Use hedging phrases ("this is how it might sound", "there is a choice here").
+Ending: Always end with an open stop question that returns responsibility to the user.`
       }
     ]
   }
@@ -620,3 +637,103 @@ export const getNodeColor = (type: string) => {
     default: return { background: '#94a3b8', border: '#475569', highlight: '#cbd5e1' };
   }
 };
+
+// ─── Looking Glass Cards ──────────────────────────────────────────
+export const LOOKING_GLASS_CARDS = [
+  {
+    id: 'mirror',
+    title: 'Mirror, Not Magic',
+    tagline: 'The LLM is a looking glass — more than a wonderland.',
+    color: 'rose',
+    content: `It reflects your material back, structured through CBSA.\nEvery claim sourced. Every step approved by you.\nAlice decides where and when to step.`,
+  },
+  {
+    id: 'low-floor',
+    title: 'Low Floor, High Ceiling',
+    tagline: 'After Mitchel Resnick\'s design principles for Scratch',
+    color: 'indigo',
+    content: `**Chat-native platforms** — Claude Projects · Gemini · GPTs\n- Every step is a conversation — maximum human-in-the-loop\n- Full prompt transparency — readable, editable, challengeable\n- You control the LLM directly in natural language\n\n**Not a standalone app** — No React + Node + API production stack.\nWe gave up polished agentic UX — which has real advantages — because CBSA should be driven by human judgment, not automated by agent workflows.`,
+  },
+  {
+    id: 'stay-current',
+    title: 'Stay Current, Stay in Control',
+    tagline: 'LLMs evolve fast. Our platform choice keeps us on the edge.',
+    color: 'emerald',
+    content: `- Test the latest models the moment they ship — no migration, no refactoring\n- No API costs that make us conservative with the deep, multi-stage analysis CBSA demands\n- No architectural lock-in — what works today doesn't constrain tomorrow\n\n*The tool serves the assessor. The assessor doesn't serve the tool.*`,
+  },
+];
+
+// ─── Glossary ─────────────────────────────────────────────────────
+export const GLOSSARY: { term: string; definition: string; relatedHash?: string }[] = [
+  { term: 'CBSA', definition: 'Context-Based Significance Assessment — a structured methodology for evaluating cultural heritage through contexts, values, authenticity, and comparison.', relatedHash: 'step-0' },
+  { term: 'Context Effect', definition: 'Bidirectional analysis: how context frames the asset\'s meaning AND how the asset reframes its context.', relatedHash: 'step-1' },
+  { term: 'Epistemic Notation', definition: 'Three-tier evidence marking: explicit (sourced), inferred°, uncertain💭 — making the bot\'s confidence visible.', relatedHash: 'notation' },
+  { term: 'HITL', definition: 'Human-in-the-Loop — the assessor approves every stage transition. The bot proposes; the human decides.', relatedHash: 'governance' },
+  { term: 'Nara Grid', definition: 'Authenticity framework (form, material, use, setting) graded High/Medium/Low/Lost per row.', relatedHash: 'step-3' },
+  { term: 'Knowledge Graph', definition: 'Interactive visual mapping of entities (places, events, values) and their semantic relationships.', relatedHash: 'graph' },
+  { term: 'Significance Statement', definition: 'The synthesis (Stage 5): a coherent narrative weaving contexts, values, integrity and distinctiveness into "why conserve."', relatedHash: 'step-5' },
+  { term: 'MA-RA', definition: 'Read-Assessment workflow — structured analytical readings of a single completed assessment.', relatedHash: 'read-assessment' },
+  { term: 'MA-RC', definition: 'Read-Collection workflow — cross-sectional analysis scanning a collection of heritage assessments.', relatedHash: 'inventory' },
+  { term: 'Value Dynamics', definition: 'Cohesion or tension between identified heritage values — does a value reinforce or compete with another?', relatedHash: 'step-2' },
+  { term: 'Session Debrief', definition: 'Post-assessment reflection: 3 questions + interaction map creating a research-grade trust profile.', relatedHash: 'session-report' },
+];
+
+// ─── Session Resources ────────────────────────────────────────────
+export const SESSION_RESOURCES: Record<number, { prep?: string[]; stages?: number[]; tools?: string[]; hashLinks?: { label: string; hash: string }[] }> = {
+  1: {
+    stages: [0, 1, 2, 3, 4, 5, 6],
+    hashLinks: [
+      { label: 'Design Principles', hash: 'design' },
+      { label: 'Epistemic Notation', hash: 'notation' },
+    ],
+  },
+  2: {
+    stages: [0, 1, 2, 3, 4, 5],
+    tools: ['Prompt Advisor', 'Knowledge Graph'],
+    hashLinks: [
+      { label: 'InSites-CAA (GPT)', hash: '' },
+      { label: 'InSites-CAA (Gemini)', hash: '' },
+    ],
+  },
+  3: {
+    stages: [5, 6],
+    tools: ['Dashboard', 'Collection Analysis', 'Read Assessment'],
+    hashLinks: [
+      { label: 'Assessment Dashboard', hash: 'dashboard-preview' },
+      { label: 'Collection Dashboard', hash: 'inventory' },
+      { label: 'Read Assessment', hash: 'read-assessment' },
+    ],
+  },
+  4: {
+    tools: ['Agent Builder'],
+    hashLinks: [
+      { label: 'Build Agent (GPT)', hash: '' },
+      { label: 'Build Agent (Gemini)', hash: '' },
+    ],
+  },
+};
+
+// ─── Lab Team ─────────────────────────────────────────────────────
+export const LAB_TEAM = [
+  {
+    name: 'Dr. Yael Alef',
+    role: 'Principal Investigator',
+    affiliation: 'Faculty of Architecture, Technion',
+    bio: 'Heritage assessment methodology, CBSA development, conservation planning.',
+  },
+  {
+    name: 'Yuval Shafriri',
+    role: 'AI & Development Lead',
+    affiliation: 'InSites Knowledge Lab',
+    bio: 'AI system design, prompt engineering, knowledge representation for heritage.',
+  },
+];
+
+// ─── Experience Components ────────────────────────────────────────
+export const EXPERIENCE_COMPONENTS = [
+  { label: 'CBSA Experience', description: 'Structured stages, each building on the last', icon: 'layers' },
+  { label: 'Human-AI Collaboration', description: 'HITL as an explicit value, not a safety guardrail', icon: 'users' },
+  { label: 'Design Principles in Action', description: 'Transparency and grounding shown through the work', icon: 'eye' },
+  { label: 'New Representations', description: 'KG, timeline, dashboard, narrative create the insight moment', icon: 'sparkles' },
+  { label: 'Transfer', description: 'Participants leave able to apply the approach themselves', icon: 'share' },
+];
