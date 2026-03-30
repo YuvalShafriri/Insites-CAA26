@@ -44,10 +44,10 @@ InSites-Brain/MANIFEST.md
 # === Paper content (gitignore for now) ===
 InSites-Brain/Heritage4.0/
 
-# === Claude: keep only user-facing files ===
-# Public: InSites-CAA.md, InSites-CAA-mono v3.md, WORKSHOP-README.md, SETUP-GUIDE.md
-# Public: skills/ (4 bot skills), claude-ai-project/ (self-contained package)
+# === Claude: keep only current version + user-facing files ===
 InSites-Brain/Claude/InSites-CAA-mono-v2.2.md
+InSites-Brain/Claude/InSites-CAA-mono v5.3*
+InSites-Brain/Claude/InSites-CAA-main.md
 InSites-Brain/Claude/tests/
 InSites-Brain/Claude/plans/
 InSites-Brain/Claude/KG-Skill-en/
@@ -61,14 +61,15 @@ InSites-Brain/Claude/skills/agent-builder-skill.md
 InSites-Brain/Claude/skills/prompt-qa-skill.md
 InSites-Brain/Claude/skills/.vscode/
 
-# === GPTs: keep only root files, gitignore subdirectories ===
+# === GPTs: keep only root files + runtime + tests ===
 InSites-Brain/GPTs/CAA/
-InSites-Brain/GPTs/CAA-GTPs (Claude.ai-Spilts)/Original/
-InSites-Brain/GPTs/CAA-GTPs (Claude.ai-Spilts)/.claude/
-InSites-Brain/GPTs/CAA-GTPs (Claude.ai-Spilts)/.vscode/
+InSites-Brain/GPTs/CAA-GTPs (Claude.ai-Spilts)/
+InSites-Brain/GPTs/CAA-GTPs-InSites v4_current_files_package/
 
-# === Gemini: keep root files only ===
+# === Gemini: keep only current version ===
 InSites-Brain/Gemini/MISC-CHECK/
+InSites-Brain/Gemini/InSites-CAA-mono- GEM v5.1.md
+InSites-Brain/Gemini/InSites-CAA-mono- GEM v5.2.md
 
 # === Design: internal-only files ===
 InSites-Brain/design/less-is-more.md
@@ -78,3 +79,29 @@ InSites-Brain/design/InSites-CAA bot brain Upgrades*
 InSites-Brain/design/dev-tracking-notion.md
 InSites-Brain/design/Scout-prompt.md
 InSites-Brain/design/agent4agents/
+
+# === Agent-for-agents: keep only v6_5 + Hebrew ===
+InSites-Brain/agent-for-agents/agent-for-agents-en.md
+
+# === Sites data: keep only what's needed ===
+# EAC — keep only the two guidance PDFs
+InSites-Brain/sites-data/EAC/EAC-DASH/
+InSites-Brain/sites-data/EAC/EAC11_sites/
+InSites-Brain/sites-data/EAC/result/
+InSites-Brain/sites-data/EAC/small-dataset-4-benchmark/
+
+# Mills — keep only mills-2021-v2.json (has coordinates)
+InSites-Brain/sites-data/mills-2021-v1.json
+InSites-Brain/sites-data/mills-2021-en.json
+InSites-Brain/sites-data/mills-kg-data.json
+InSites-Brain/sites-data/mills-dashboard.html.*
+InSites-Brain/sites-data/mills-analysis.js
+InSites-Brain/sites-data/translate-mills.js
+InSites-Brain/sites-data/apply-translations.js
+InSites-Brain/sites-data/fix-remaining-hebrew.js
+
+# Kinneret old results
+InSites-Brain/sites-data/Samples and Sites Descriptions/Sites-Descriptions/Kinneret-Sites/result/
+
+# Dev screenshots
+*.jpeg
