@@ -1506,7 +1506,7 @@ const App: React.FC = () => {
                         href="https://gemini.google.com/gem/1OI5VSeNb5J94Rr53Abuv8VK5nNkXq7jF?usp=sharing"
                         icon={<Bot size={16} />}
                         label="Build Your Own AI Assistant"
-                        secondaryLabel="Design your own AI agent — choose its expertise, principles, and workflow"
+                        secondaryLabel="Build a custom AI assistant for a specific task — like drafting policy documents, reviewing reports, or analyzing data. You define the purpose first and then this agent will help you build your own."
                         highlight={true}
                         colorScheme="indigo"
                       />
