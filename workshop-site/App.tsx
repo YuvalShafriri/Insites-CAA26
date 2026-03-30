@@ -1504,7 +1504,7 @@ const App: React.FC = () => {
                         colorScheme="emerald"
                       />
                       <ResourceLink
-                        onClick={() => navigateTo("presentation")}
+                        href="https://gemini.google.com/gem/1LbC3oHGIS83rP8uWdIEEeaU9_ixfEMh1?usp=sharing"
                         icon={<Bot size={16} />}
                         label="Build Your Own AI Assistant"
                         secondaryLabel="Design your own AI agent — choose its expertise, principles, and workflow"
