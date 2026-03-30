@@ -103,5 +103,8 @@ InSites-Brain/sites-data/fix-remaining-hebrew.js
 # Kinneret old results
 InSites-Brain/sites-data/Samples and Sites Descriptions/Sites-Descriptions/Kinneret-Sites/result/
 
+# Large files
+InSites-Brain/sites-data/Samples and Sites Descriptions/Sites-Descriptions/huqoq/hoquq.docx
+
 # Dev screenshots
 *.jpeg
