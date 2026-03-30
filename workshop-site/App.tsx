@@ -205,7 +205,7 @@ const getAgentColorStyle = (colorName: string) => {
 const getAgentTheme = (
   agentId: number,
   colorName: string,
-  isSelected: boolean
+  isSelected: boolean,
 ) => {
   const style = getAgentColorStyle(colorName);
   if (isSelected) {
@@ -265,13 +265,15 @@ const App: React.FC = () => {
   // Dialogue Advisor states
   const [consultationInput, setConsultationInput] = useState<string>("");
   const [consultationResult, setConsultationResult] = useState<string | null>(
-    null
+    null,
   );
   const [isConsulting, setIsConsulting] = useState<boolean>(false);
 
   // Custom KG input
   const [kgInputText, setKgInputText] = useState<string>(ZAIRA_TEXT);
-  const [kgSelectedSample, setKgSelectedSample] = useState<string | null>("zaira");
+  const [kgSelectedSample, setKgSelectedSample] = useState<string | null>(
+    "zaira",
+  );
 
   // Modals states
   const [isGraphModalOpen, setIsGraphModalOpen] = useState(false);
@@ -282,16 +284,22 @@ const App: React.FC = () => {
   const [isGraphInputModalOpen, setIsGraphInputModalOpen] = useState(false);
   const [isEpistemicModalOpen, setIsEpistemicModalOpen] = useState(false);
   const [isGovernanceModalOpen, setIsGovernanceModalOpen] = useState(false);
-  const [isSessionReportModalOpen, setIsSessionReportModalOpen] = useState(false);
-  const [isDashboardPreviewModalOpen, setIsDashboardPreviewModalOpen] = useState(false);
-  const [isCollectionDashboardOpen, setIsCollectionDashboardOpen] = useState(false);
-  const [isReadAssessmentModalOpen, setIsReadAssessmentModalOpen] = useState(false);
+  const [isSessionReportModalOpen, setIsSessionReportModalOpen] =
+    useState(false);
+  const [isDashboardPreviewModalOpen, setIsDashboardPreviewModalOpen] =
+    useState(false);
+  const [isCollectionDashboardOpen, setIsCollectionDashboardOpen] =
+    useState(false);
+  const [isReadAssessmentModalOpen, setIsReadAssessmentModalOpen] =
+    useState(false);
   const [isGlossaryModalOpen, setIsGlossaryModalOpen] = useState(false);
   const [isPresentationModalOpen, setIsPresentationModalOpen] = useState(false);
   const [isOpeningSlideOpen, setIsOpeningSlideOpen] = useState(false);
-  const [readAssessmentInitialRoute, setReadAssessmentInitialRoute] = useState<string | null>(null);
+  const [readAssessmentInitialRoute, setReadAssessmentInitialRoute] = useState<
+    string | null
+  >(null);
   const [inventoryModalLang, setInventoryModalLang] = useState<"he" | "en">(
-    "en"
+    "en",
   );
   const [selectedQuery, setSelectedQuery] =
     useState<ResearchQuerySelection | null>(null);
@@ -337,7 +345,7 @@ const App: React.FC = () => {
       // Fallback: open tools if route not found
       openResearchTools();
     },
-    [openResearchTools]
+    [openResearchTools],
   );
 
   // Deep linking - hash routes mapping
@@ -353,7 +361,10 @@ const App: React.FC = () => {
     "session-report": () => setIsSessionReportModalOpen(true),
     "dashboard-preview": () => setIsDashboardPreviewModalOpen(true),
     "collection-dashboard": () => setIsCollectionDashboardOpen(true),
-    "read-assessment": () => { setReadAssessmentInitialRoute(null); setIsReadAssessmentModalOpen(true); },
+    "read-assessment": () => {
+      setReadAssessmentInitialRoute(null);
+      setIsReadAssessmentModalOpen(true);
+    },
     glossary: () => setIsGlossaryModalOpen(true),
     presentation: () => setIsPresentationModalOpen(true),
     opening: () => setIsOpeningSlideOpen(true),
@@ -362,13 +373,34 @@ const App: React.FC = () => {
       setMobileView(window.innerWidth < 768 ? "DESIGN" : "HOME");
     },
     // Legacy routes — redirect to MA-RA modal with the relevant reading pre-selected
-    "q-narratives": () => { setReadAssessmentInitialRoute("q-narratives"); setIsReadAssessmentModalOpen(true); },
-    "q-sentiment": () => { setReadAssessmentInitialRoute("q-sentiment"); setIsReadAssessmentModalOpen(true); },
-    "q-education": () => { setReadAssessmentInitialRoute("q-education"); setIsReadAssessmentModalOpen(true); },
-    "q-semiotics": () => { setReadAssessmentInitialRoute("q-semiotics"); setIsReadAssessmentModalOpen(true); },
-    "q-jester-chorus": () => { setReadAssessmentInitialRoute("q-jester"); setIsReadAssessmentModalOpen(true); },
-    "q-jester": () => { setReadAssessmentInitialRoute("q-jester"); setIsReadAssessmentModalOpen(true); },
-    "q-chorus": () => { setReadAssessmentInitialRoute("q-chorus"); setIsReadAssessmentModalOpen(true); },
+    "q-narratives": () => {
+      setReadAssessmentInitialRoute("q-narratives");
+      setIsReadAssessmentModalOpen(true);
+    },
+    "q-sentiment": () => {
+      setReadAssessmentInitialRoute("q-sentiment");
+      setIsReadAssessmentModalOpen(true);
+    },
+    "q-education": () => {
+      setReadAssessmentInitialRoute("q-education");
+      setIsReadAssessmentModalOpen(true);
+    },
+    "q-semiotics": () => {
+      setReadAssessmentInitialRoute("q-semiotics");
+      setIsReadAssessmentModalOpen(true);
+    },
+    "q-jester-chorus": () => {
+      setReadAssessmentInitialRoute("q-jester");
+      setIsReadAssessmentModalOpen(true);
+    },
+    "q-jester": () => {
+      setReadAssessmentInitialRoute("q-jester");
+      setIsReadAssessmentModalOpen(true);
+    },
+    "q-chorus": () => {
+      setReadAssessmentInitialRoute("q-chorus");
+      setIsReadAssessmentModalOpen(true);
+    },
     "step-0": () => {
       setSelectedAgentId(0);
       setShowResearchAids(false);
@@ -489,7 +521,7 @@ const App: React.FC = () => {
   const [graphData, setGraphData] = useState<any | null>(null);
   const [isGraphLoading, setIsGraphLoading] = useState(false);
   const [selectedNodeDetails, setSelectedNodeDetails] = useState<any | null>(
-    null
+    null,
   );
   const graphContainerRef = useRef<HTMLDivElement>(null);
   const networkRef = useRef<Network | null>(null);
@@ -542,11 +574,13 @@ const App: React.FC = () => {
     setConsultationResult(null);
     try {
       const result = await callGemini(
-        `${PROMPT_ADVISOR_SYSTEM}\nRequested research goal: "${consultationInput}"`
+        `${PROMPT_ADVISOR_SYSTEM}\nRequested research goal: "${consultationInput}"`,
       );
       setConsultationResult(result);
     } catch (e) {
-      setConsultationResult("An error occurred building the research plan. Please try again.");
+      setConsultationResult(
+        "An error occurred building the research plan. Please try again.",
+      );
     } finally {
       setIsConsulting(false);
     }
@@ -560,7 +594,7 @@ const App: React.FC = () => {
     // Use pre-built data for known samples (unless AI Live mode is on)
     if (!forceApi && kgSelectedSample && PREBUILT_GRAPHS[kgSelectedSample]) {
       setIsGraphLoading(true);
-      await new Promise(resolve => setTimeout(resolve, 3500));
+      await new Promise((resolve) => setTimeout(resolve, 3500));
       setGraphData(PREBUILT_GRAPHS[kgSelectedSample]);
       setIsGraphLoading(false);
       return;
@@ -610,7 +644,7 @@ const App: React.FC = () => {
           size: n.type === "site" ? 40 : 25,
           borderWidth: 2,
           shadow: true,
-        }))
+        })),
       );
       const edges = new DataSet(
         graphData.edges.map((e: any) => ({
@@ -620,7 +654,7 @@ const App: React.FC = () => {
           width: 1,
           font: { align: "middle", size: 10, face: "Assistant" },
           smooth: { type: "continuous" },
-        }))
+        })),
       );
       const options = {
         physics: {
@@ -640,7 +674,7 @@ const App: React.FC = () => {
       const network = new Network(
         graphContainerRef.current,
         { nodes, edges },
-        options
+        options,
       );
       networkRef.current = network;
       network.on("click", (params) => {
@@ -663,18 +697,18 @@ const App: React.FC = () => {
     selectedAgentId !== null && currentAgent
       ? `step-${selectedAgentId}`
       : mobileView === "STEPS"
-      ? "steps"
-      : mobileView === "ABOUT"
-      ? "about"
-      : mobileView === "PROGRAM"
-      ? "program"
-      : mobileView === "STEP_DETAIL" && currentAgent
-      ? `step-detail-${selectedAgentId}`
-      : showDesignView
-      ? "design"
-      : showResearchAids || mobileView === "TOOLS"
-      ? "tools"
-      : "home";
+        ? "steps"
+        : mobileView === "ABOUT"
+          ? "about"
+          : mobileView === "PROGRAM"
+            ? "program"
+            : mobileView === "STEP_DETAIL" && currentAgent
+              ? `step-detail-${selectedAgentId}`
+              : showDesignView
+                ? "design"
+                : showResearchAids || mobileView === "TOOLS"
+                  ? "tools"
+                  : "home";
 
   return (
     <div
@@ -783,7 +817,10 @@ const App: React.FC = () => {
                       <BookOpen size={16} />
                       <span>Home</span>
                     </button>
-                    <ChevronLeft size={16} className="text-slate-400 rotate-180" />
+                    <ChevronLeft
+                      size={16}
+                      className="text-slate-400 rotate-180"
+                    />
                     <span className="text-slate-600 font-medium">About</span>
                   </div>
                 </div>
@@ -835,7 +872,10 @@ const App: React.FC = () => {
                           <BookOpen size={16} />
                           <span>Home</span>
                         </button>
-                        <ChevronLeft size={16} className="text-slate-400 rotate-180" />
+                        <ChevronLeft
+                          size={16}
+                          className="text-slate-400 rotate-180"
+                        />
                         <span className="text-slate-600 font-medium">
                           {currentAgent.name}
                         </span>
@@ -886,7 +926,7 @@ const App: React.FC = () => {
                                 </span>
                                 <span>{item}</span>
                               </li>
-                            )
+                            ),
                           )}
                         </ul>
 
@@ -975,11 +1015,11 @@ const App: React.FC = () => {
                                   ? promptLang === "he"
                                     ? PROMPT_TRANSLATIONS[selectedAgentId] ||
                                       PROMPT_TEMPLATES[selectedAgentId](
-                                        rawData
+                                        rawData,
                                       ).toString()
                                     : PROMPT_PREVIEWS_EN[selectedAgentId] ||
                                       PROMPT_TEMPLATES[selectedAgentId](
-                                        rawData
+                                        rawData,
                                       ).toString()
                                   : ""
                               }
@@ -1017,10 +1057,10 @@ const App: React.FC = () => {
                             (() => {
                               const [promptText, explanationText] =
                                 consultationResult.includes(
-                                  "---PROMPT_BOUNDARY---"
+                                  "---PROMPT_BOUNDARY---",
                                 )
                                   ? consultationResult.split(
-                                      "---PROMPT_BOUNDARY---"
+                                      "---PROMPT_BOUNDARY---",
                                     )
                                   : [consultationResult, ""];
                               const cleanPrompt = promptText
@@ -1102,13 +1142,23 @@ const App: React.FC = () => {
                       <BookOpen size={16} />
                       <span>Home</span>
                     </button>
-                    <ChevronLeft size={16} className="text-slate-400 rotate-180" />
-                    <span className="text-slate-600 font-medium">Design Principles</span>
+                    <ChevronLeft
+                      size={16}
+                      className="text-slate-400 rotate-180"
+                    />
+                    <span className="text-slate-600 font-medium">
+                      Design Principles
+                    </span>
                   </div>
 
                   <div>
-                    <h3 className="text-2xl font-black text-slate-500 mb-2">Design Principles</h3>
-                    <p className="text-slate-500">How transparency, control, and evidence governance work in InSites-CAA</p>
+                    <h3 className="text-2xl font-black text-slate-500 mb-2">
+                      Design Principles
+                    </h3>
+                    <p className="text-slate-500">
+                      How transparency, control, and evidence governance work in
+                      InSites-CAA
+                    </p>
                   </div>
 
                   <DesignPrinciplesView onNavigate={navigateTo} />
@@ -1127,7 +1177,10 @@ const App: React.FC = () => {
                       <BookOpen size={16} />
                       <span>Home</span>
                     </button>
-                    <ChevronLeft size={16} className="text-slate-400 rotate-180" />
+                    <ChevronLeft
+                      size={16}
+                      className="text-slate-400 rotate-180"
+                    />
                     <span className="text-slate-600 font-medium">
                       Extensions & Tools
                     </span>
@@ -1138,7 +1191,8 @@ const App: React.FC = () => {
                       Toolbox & Extensions
                     </h3>
                     <p className="text-slate-500">
-                      Advanced tools for analysis, visualization and deep exploration{" "}
+                      Advanced tools for analysis, visualization and deep
+                      exploration{" "}
                     </p>
                   </div>
 
@@ -1161,7 +1215,8 @@ const App: React.FC = () => {
                             Assessment Dashboard
                           </h4>
                           <p className="text-[11px] text-slate-500 line-clamp-2">
-                            10-tab interactive visualization of a complete assessment
+                            10-tab interactive visualization of a complete
+                            assessment
                           </p>
                         </div>
                       </button>
@@ -1179,7 +1234,8 @@ const App: React.FC = () => {
                             Knowledge Graph
                           </h4>
                           <p className="text-[11px] text-slate-500 line-clamp-2">
-                            Visual mapping of entities and semantic relationships
+                            Visual mapping of entities and semantic
+                            relationships
                           </p>
                         </div>
                       </button>
@@ -1197,7 +1253,8 @@ const App: React.FC = () => {
                             Visual Decoding
                           </h4>
                           <p className="text-[11px] text-slate-500 line-clamp-2">
-                            Analyze attributes, relationships and values from images
+                            Analyze attributes, relationships and values from
+                            images
                           </p>
                         </div>
                       </button>
@@ -1215,7 +1272,8 @@ const App: React.FC = () => {
                             Collection Analysis
                           </h4>
                           <p className="text-[11px] text-slate-500 line-clamp-2">
-                            Cross-sectional analysis of assessment collections (MA-RC)
+                            Cross-sectional analysis of assessment collections
+                            (MA-RC)
                           </p>
                         </div>
                       </button>
@@ -1233,7 +1291,8 @@ const App: React.FC = () => {
                             Read Assessment
                           </h4>
                           <p className="text-[11px] text-slate-500 line-clamp-2">
-                            Structured readings: analytical, interpretive, and generative lenses
+                            Structured readings: analytical, interpretive, and
+                            generative lenses
                           </p>
                         </div>
                       </button>
@@ -1256,7 +1315,9 @@ const App: React.FC = () => {
                       </div>
                     </div>
                     <p className="text-sm text-slate-600 mb-3">
-                      Enter your goal (e.g., "I want to analyze the social values"), and the advisor will build a customized prompt for the language model.
+                      Enter your goal (e.g., "I want to analyze the social
+                      values"), and the advisor will build a customized prompt
+                      for the language model.
                     </p>
                     <div className="relative">
                       <textarea
@@ -1297,7 +1358,7 @@ const App: React.FC = () => {
                                   .split("---PROMPT_BOUNDARY---")[0]
                                   .replace(/^```(markdown|json)?/g, "")
                                   .replace(/```$/g, "")
-                                  .trim()
+                                  .trim(),
                               )
                             }
                             className="text-xs bg-white/10 hover:bg-white/20 text-indigo-200 hover:text-white px-2 py-1 rounded transition-all flex items-center gap-1 cursor-pointer"
@@ -1320,7 +1381,6 @@ const App: React.FC = () => {
               /* DEFAULT HOME VIEW */
               <div className="flex-1 flex flex-col overflow-y-auto bg-slate-50/30 custom-scrollbar pb-[140px] sm:pb-[90px] md:pb-16">
                 <div className="max-w-3xl mx-auto w-full px-6 py-2 md:py-3 space-y-5">
-
                   {/* Poster — slightly constrained width */}
                   <div className="pt-2 md:pt-3 max-w-2xl mx-auto">
                     <img
@@ -1334,149 +1394,234 @@ const App: React.FC = () => {
                   </div>
 
                   <div className="space-y-4">
-                      {/* Workshop Program Card */}
-                      <button
-                        onClick={() => navigateTo("program")}
-                        className="w-full flex items-center gap-4 p-4 bg-indigo-50 hover:bg-indigo-100 rounded-2xl border border-indigo-200 hover:border-indigo-300 transition-all group cursor-pointer text-left shadow-sm"
-                      >
-                        <div className="p-2.5 bg-indigo-600 text-white rounded-xl shrink-0 group-hover:scale-110 transition-transform">
-                          <Layout size={20} />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-base text-indigo-900 mb-0.5">Workshop Introduction</h4>
-                          <p className="text-sm text-indigo-600/70">What is the story of "InSites"?, Design Principles, Workshop Program  </p>
-                        </div>
-                      </button>
-
-                      {/* Bot Platform Cards */}
+                    {/* Workshop Program Card */}
+                    <button
+                      onClick={() => navigateTo("program")}
+                      className="w-full flex items-center gap-4 p-4 bg-indigo-50 hover:bg-indigo-100 rounded-2xl border border-indigo-200 hover:border-indigo-300 transition-all group cursor-pointer text-left shadow-sm"
+                    >
+                      <div className="p-2.5 bg-indigo-600 text-white rounded-xl shrink-0 group-hover:scale-110 transition-transform">
+                        <Layout size={20} />
+                      </div>
                       <div>
-                        <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2">Try InSites-CAA</h4>
-                        <p className="text-[11px] text-slate-500 mb-2">Recommended: paid account with reasoning mode</p>
-                        <div className="grid grid-cols-3 gap-2">
-                          <a href="https://chatgpt.com/g/g-695d3567400c8191a402087b38c7b6b7-tr-bvt-h-rkt-mshm-vt-lshymvr" target="_blank" rel="noopener noreferrer"
-                            className="flex flex-col items-center gap-1.5 p-3 bg-white border border-slate-200 rounded-xl hover:border-emerald-300 hover:bg-emerald-50/30 transition-all group cursor-pointer">
-                            <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                              <Bot size={20} className="text-emerald-600" />
-                            </div>
-                            <span className="text-xs font-bold text-slate-700">ChatGPT</span>
-                          </a>
-                          <a href="https://gemini.google.com/gem/5b822b7e1771?usp=sharing" target="_blank" rel="noopener noreferrer"
-                            className="flex flex-col items-center gap-1.5 p-3 bg-white border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/30 transition-all group cursor-pointer">
-                            <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                              <Sparkles size={20} className="text-blue-600" />
-                            </div>
-                            <span className="text-xs font-bold text-slate-700">Gemini</span>
-                            <span className="text-[9px] font-bold text-red-500">Thinking mode!</span>
-                          </a>
-                          <details className="flex flex-col items-center bg-white border border-slate-200 rounded-xl cursor-pointer group">
-                            <summary className="flex flex-col items-center gap-1.5 p-3 select-none list-none">
-                              <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                                <Sparkles size={20} className="text-purple-600" />
-                              </div>
-                              <span className="text-xs font-bold text-slate-700">Claude</span>
-                              <span className="text-[9px] font-bold text-purple-500">DIY setup ↓</span>
-                            </summary>
-                            <div className="px-3 pb-3 text-left border-t border-slate-100 mt-1 pt-2">
-                              <ol className="text-[11px] text-slate-600 space-y-1 list-decimal ml-3">
-                                <li>Go to <strong>claude.ai → Projects → Create Project</strong></li>
-                                <li>Paste <a href="https://github.com/InSites-Lab/Insites-CAA2026/blob/dev/InSites-CAA/v5.4/InSites-Brain/Claude/InSites-CAA-mono%20v5.4.md" target="_blank" rel="noopener noreferrer" className="text-purple-600 underline">this prompt</a> into Custom Instructions</li>
-                                <li>Upload your document and type <strong>"start"</strong></li>
-                              </ol>
-                            </div>
-                          </details>
-                        </div>
+                        <h4 className="font-bold text-base text-indigo-900 mb-0.5">
+                          Workshop Introduction
+                        </h4>
+                        <p className="text-sm text-indigo-600/70">
+                          What is the story of "InSites"?, Design Principles,
+                          Workshop Program{" "}
+                        </p>
                       </div>
+                    </button>
 
-                      {/* Links */}
-                      <div className="space-y-2">
-                        <ResourceLink
-                          href="https://drive.google.com/drive/folders/1HxWjZ1GVGtRsoGWZZi4kaiNuhhLPTfO1?usp=sharing"
-                          icon={<BookOpen size={16} />}
-                          label="Shared Materials"
-                          secondaryLabel="Heritage documents to work with during the workshop"
-                          highlight={true}
-                          colorScheme="emerald"
-                        />
-                        <ResourceLink
-                          onClick={() => navigateTo("presentation")}
-                          icon={<Bot size={16} />}
-                          label="Agent4Agents (Workshop Activity)"
-                          secondaryLabel="Build your own AI system instructions — Ethics in Practice session"
-                          highlight={true}
-                          colorScheme="indigo"
-                        />
-                        <ResourceLink
-                          href="https://forms.gle/F9ZykAefJQ94n2Vc7"
-                          icon={<ClipboardCheck size={16} />}
-                          label="Feedback Form"
-                          secondaryLabel="Research feedback to improve the tool"
-                          highlight={true}
-                          colorScheme="amber"
-                        />
-                        <ResourceLink
-                          href="https://github.com/InSites-Lab/Insites-CAA2026"
-                          icon={<Github size={16} />}
-                          label="GitHub Repository"
-                          secondaryLabel="Source code and system instructions"
-                          highlight={true}
-                          colorScheme="slate"
-                        />
-                      </div>
-
-                      {/* Key Terms + More Resources */}
-                      <div className="space-y-2">
-                        <button
-                          onClick={() => navigateTo("glossary")}
-                          className="w-full flex items-center gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 hover:border-slate-300 transition-all group cursor-pointer text-left"
+                    {/* Bot Platform Cards */}
+                    <div>
+                      <h4 className="text-[11px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                        Try InSites-CAA
+                      </h4>
+                      <p className="text-[11px] text-slate-500 mb-2">
+                        Recommended: paid account with reasoning mode
+                      </p>
+                      <div className="grid grid-cols-3 gap-2">
+                        <a
+                          href="https://chatgpt.com/g/g-695d3567400c8191a402087b38c7b6b7-tr-bvt-h-rkt-mshm-vt-lshymvr"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-col items-center gap-1.5 p-3 bg-white border border-slate-200 rounded-xl hover:border-emerald-300 hover:bg-emerald-50/30 transition-all group cursor-pointer"
                         >
-                          <div className="w-8 h-8 bg-slate-200 text-slate-600 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                            <BookText size={16} />
+                          <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Bot size={20} className="text-emerald-600" />
                           </div>
-                          <div>
-                            <h4 className="font-bold text-sm text-slate-700">Key Terms</h4>
-                            <p className="text-[11px] text-slate-500">CBSA, HITL, Context Effect, Nara Grid and more</p>
+                          <span className="text-xs font-bold text-slate-700">
+                            ChatGPT
+                          </span>
+                        </a>
+                        <a
+                          href="https://gemini.google.com/gem/5b822b7e1771?usp=sharing"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex flex-col items-center gap-1.5 p-3 bg-white border border-slate-200 rounded-xl hover:border-blue-300 hover:bg-blue-50/30 transition-all group cursor-pointer"
+                        >
+                          <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <Sparkles size={20} className="text-blue-600" />
                           </div>
-                        </button>
-
-                        <details className="bg-white border border-slate-200 rounded-xl overflow-hidden group">
-                          <summary className="p-4 cursor-pointer flex items-center justify-between hover:bg-slate-50 transition-colors select-none">
-                            <span className="font-bold text-sm text-slate-600">More Resources</span>
-                            <ChevronDown size={16} className="text-slate-400 group-open:rotate-180 transition-transform" />
+                          <span className="text-xs font-bold text-slate-700">
+                            Gemini
+                          </span>
+                          <span className="text-[9px] font-bold text-red-500">
+                            Thinking mode!
+                          </span>
+                        </a>
+                        <details className="flex flex-col items-center bg-white border border-slate-200 rounded-xl cursor-pointer group">
+                          <summary className="flex flex-col items-center gap-1.5 p-3 select-none list-none">
+                            <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                              <Sparkles size={20} className="text-purple-600" />
+                            </div>
+                            <span className="text-xs font-bold text-slate-700">
+                              Claude
+                            </span>
+                            <span className="text-[9px] font-bold text-purple-500">
+                              DIY setup ↓
+                            </span>
                           </summary>
-                          <div className="px-4 pb-4 space-y-3 border-t border-slate-100">
-                            <ResourceGroup title="Dashboards & Visualization">
-                              <div className="hidden sm:block">
-                                <ResourceLink onClick={() => navigateTo("dashboard-preview")} icon={<LayoutDashboard size={16} />} label="Assessment Dashboard — Demo" noBorder />
-                                <ResourceLink onClick={() => navigateTo("inventory")} icon={<PieChart size={16} />} label="Collection Dashboard — Demo" noBorder />
-                              </div>
-                              <div className="sm:hidden">
-                                <ResourceLink icon={<LayoutDashboard size={16} />} label="Assessment Dashboard — Demo" secondaryLabel="Open on desktop" noBorder />
-                              </div>
-                            </ResourceGroup>
-                            <ResourceGroup title="Agent Builder">
-                              <ResourceLink href="https://chatgpt.com/g/g-69492aebb530819199628bb444d024f3-svkn-lbnyyt-svkn-yqvmvs" icon={<Bot size={16} />} label="Build Agent (GPTs)" noBorder colorScheme="emerald" />
-                              <ResourceLink href="https://gemini.google.com/gem/1LbC3oHGIS83rP8uWdIEEeaU9_ixfEMh1?usp=sharing" icon={<Sparkles size={16} />} label="Build Agent (Gemini)" noBorder colorScheme="emerald" />
-                            </ResourceGroup>
-                            <ResourceLink
-                              href="https://drive.google.com/drive/folders/1AOu_r9towgJwqgQfrLEI8JcbOltprpJH?usp=sharing"
-                              icon={<LayoutDashboard size={16} />}
-                              label="Workshop Presentations"
-                              secondaryLabel="Previous workshop presentations"
-                              colorScheme="indigo"
-                              highlight
-                            />
+                          <div className="px-3 pb-3 text-left border-t border-slate-100 mt-1 pt-2">
+                            <ol className="text-[11px] text-slate-600 space-y-1 list-decimal ml-3">
+                              <li>
+                                Go to{" "}
+                                <strong>
+                                  claude.ai → Projects → Create Project
+                                </strong>
+                              </li>
+                              <li>
+                                Paste{" "}
+                                <a
+                                  href="https://github.com/InSites-Lab/Insites-CAA2026/blob/dev/InSites-CAA/v5.4/InSites-Brain/Claude/InSites-CAA-mono%20v5.4.md"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-purple-600 underline"
+                                >
+                                  this prompt
+                                </a>{" "}
+                                into Custom Instructions
+                              </li>
+                              <li>
+                                Upload your document and type{" "}
+                                <strong>"start"</strong>
+                              </li>
+                            </ol>
                           </div>
                         </details>
                       </div>
                     </div>
+
+                    {/* Links */}
+                    <div className="space-y-2">
+                      <ResourceLink
+                        href="https://drive.google.com/drive/folders/1HxWjZ1GVGtRsoGWZZi4kaiNuhhLPTfO1?usp=sharing"
+                        icon={<BookOpen size={16} />}
+                        label="Shared Materials"
+                        secondaryLabel="Heritage documents to work with during the workshop"
+                        highlight={true}
+                        colorScheme="emerald"
+                      />
+                      <ResourceLink
+                        onClick={() => navigateTo("presentation")}
+                        icon={<Bot size={16} />}
+                        label="Agent4Agents (Workshop Activity)"
+                        secondaryLabel="Build your own AI system instructions — Ethics in Practice session"
+                        highlight={true}
+                        colorScheme="indigo"
+                      />
+                      <ResourceLink
+                        href="https://forms.gle/F9ZykAefJQ94n2Vc7"
+                        icon={<ClipboardCheck size={16} />}
+                        label="Feedback Form"
+                        secondaryLabel="Research feedback to improve the tool"
+                        highlight={true}
+                        colorScheme="amber"
+                      />
+                      <ResourceLink
+                        href="https://github.com/InSites-Lab/Insites-CAA2026"
+                        icon={<Github size={16} />}
+                        label="GitHub Repository"
+                        secondaryLabel="Source code and system instructions"
+                        highlight={true}
+                        colorScheme="slate"
+                      />
+                    </div>
+
+                    {/* Key Terms + More Resources */}
+                    <div className="space-y-2">
+                      <button
+                        onClick={() => navigateTo("glossary")}
+                        className="w-full flex items-center gap-3 p-3 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 hover:border-slate-300 transition-all group cursor-pointer text-left"
+                      >
+                        <div className="w-8 h-8 bg-slate-200 text-slate-600 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                          <BookText size={16} />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-sm text-slate-700">
+                            Key Terms
+                          </h4>
+                          <p className="text-[11px] text-slate-500">
+                            CBSA, HITL, Context Effect, Nara Grid and more
+                          </p>
+                        </div>
+                      </button>
+
+                      <details className="bg-white border border-slate-200 rounded-xl overflow-hidden group">
+                        <summary className="p-4 cursor-pointer flex items-center justify-between hover:bg-slate-50 transition-colors select-none">
+                          <span className="font-bold text-sm text-slate-600">
+                            More Resources
+                          </span>
+                          <ChevronDown
+                            size={16}
+                            className="text-slate-400 group-open:rotate-180 transition-transform"
+                          />
+                        </summary>
+                        <div className="px-4 pb-4 space-y-3 border-t border-slate-100">
+                          <ResourceGroup title="Dashboards & Visualization">
+                            <div className="hidden sm:block">
+                              <ResourceLink
+                                onClick={() => navigateTo("dashboard-preview")}
+                                icon={<LayoutDashboard size={16} />}
+                                label="Assessment Dashboard — Demo"
+                                noBorder
+                              />
+                              <ResourceLink
+                                onClick={() => navigateTo("inventory")}
+                                icon={<PieChart size={16} />}
+                                label="Collection Dashboard — Demo"
+                                noBorder
+                              />
+                            </div>
+                            <div className="sm:hidden">
+                              <ResourceLink
+                                icon={<LayoutDashboard size={16} />}
+                                label="Assessment Dashboard — Demo"
+                                secondaryLabel="Open on desktop"
+                                noBorder
+                              />
+                            </div>
+                          </ResourceGroup>
+                          <ResourceGroup title="Agent Builder">
+                            <ResourceLink
+                              href="https://chatgpt.com/g/g-69492aebb530819199628bb444d024f3-svkn-lbnyyt-svkn-yqvmvs"
+                              icon={<Bot size={16} />}
+                              label="Build Agent (GPTs)"
+                              noBorder
+                              colorScheme="emerald"
+                            />
+                            <ResourceLink
+                              href="https://gemini.google.com/gem/1LbC3oHGIS83rP8uWdIEEeaU9_ixfEMh1?usp=sharing"
+                              icon={<Sparkles size={16} />}
+                              label="Build Agent (Gemini)"
+                              noBorder
+                              colorScheme="emerald"
+                            />
+                          </ResourceGroup>
+                          <ResourceLink
+                            href="https://drive.google.com/drive/folders/1AOu_r9towgJwqgQfrLEI8JcbOltprpJH?usp=sharing"
+                            icon={<LayoutDashboard size={16} />}
+                            label="Workshop Presentations"
+                            secondaryLabel="Previous workshop presentations"
+                            colorScheme="indigo"
+                            highlight
+                          />
+                        </div>
+                      </details>
+                    </div>
                   </div>
                 </div>
+              </div>
             )}
           </SwitchTransition>
 
           <footer
             className="flex-row-reverse fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur border-t border-slate-200 p-2 shadow-lg md:bottom-0"
-            style={{ zIndex: 45, bottom: window.innerWidth < 768 ? '70px' : '0' }}
+            style={{
+              zIndex: 45,
+              bottom: window.innerWidth < 768 ? "70px" : "0",
+            }}
             dir="ltr"
           >
             <div className=" mx-auto flex items-center justify-between gap-3 flex-wrap sm:flex-nowrap">
@@ -1491,7 +1636,8 @@ const App: React.FC = () => {
               </a>
 
               <div className=" text-xs sm:text-[13px] text-slate-400 opacity-100 truncate flex-1 text-center sm:text-left">
-                 Companion site for InSites-CAA significance assessment workshops © Developed by Dr. Yael Alef and Yuval Shafriri
+                Companion site for InSites-CAA significance assessment workshops
+                © Developed by Dr. Yael Alef and Yuval Shafriri
               </div>
             </div>
           </footer>
@@ -1565,52 +1711,83 @@ const App: React.FC = () => {
           window.location.hash = "";
         }}
         inputText={kgInputText}
-        onInputTextChange={(text: string) => { setKgInputText(text); setKgSelectedSample(null); }}
-        onSampleSelect={(text: string, sampleKey: string) => { setKgInputText(text); setKgSelectedSample(sampleKey); }}
+        onInputTextChange={(text: string) => {
+          setKgInputText(text);
+          setKgSelectedSample(null);
+        }}
+        onSampleSelect={(text: string, sampleKey: string) => {
+          setKgInputText(text);
+          setKgSelectedSample(sampleKey);
+        }}
         onGenerate={generateKnowledgeGraph}
       />
 
       <EpistemicNotationModal
         isOpen={isEpistemicModalOpen}
-        onClose={() => { setIsEpistemicModalOpen(false); window.location.hash = ""; }}
+        onClose={() => {
+          setIsEpistemicModalOpen(false);
+          window.location.hash = "";
+        }}
       />
 
       <GovernanceModal
         isOpen={isGovernanceModalOpen}
-        onClose={() => { setIsGovernanceModalOpen(false); window.location.hash = ""; }}
+        onClose={() => {
+          setIsGovernanceModalOpen(false);
+          window.location.hash = "";
+        }}
       />
 
       <SessionReportModal
         isOpen={isSessionReportModalOpen}
-        onClose={() => { setIsSessionReportModalOpen(false); window.location.hash = ""; }}
+        onClose={() => {
+          setIsSessionReportModalOpen(false);
+          window.location.hash = "";
+        }}
       />
 
       <DashboardPreviewModal
         isOpen={isDashboardPreviewModalOpen}
-        onClose={() => { setIsDashboardPreviewModalOpen(false); window.location.hash = ""; }}
+        onClose={() => {
+          setIsDashboardPreviewModalOpen(false);
+          window.location.hash = "";
+        }}
       />
 
       <CollectionDashboardModal
         isOpen={isCollectionDashboardOpen}
-        onClose={() => { setIsCollectionDashboardOpen(false); window.location.hash = ""; }}
+        onClose={() => {
+          setIsCollectionDashboardOpen(false);
+          window.location.hash = "";
+        }}
       />
 
       <ReadAssessmentModal
         isOpen={isReadAssessmentModalOpen}
-        onClose={() => { setIsReadAssessmentModalOpen(false); setReadAssessmentInitialRoute(null); window.location.hash = ""; }}
+        onClose={() => {
+          setIsReadAssessmentModalOpen(false);
+          setReadAssessmentInitialRoute(null);
+          window.location.hash = "";
+        }}
         initialReadingRoute={readAssessmentInitialRoute}
         onOpenGraph={() => navigateTo("graph")}
       />
 
       <GlossaryModal
         isOpen={isGlossaryModalOpen}
-        onClose={() => { setIsGlossaryModalOpen(false); window.location.hash = ""; }}
+        onClose={() => {
+          setIsGlossaryModalOpen(false);
+          window.location.hash = "";
+        }}
         onNavigate={navigateTo}
       />
 
       <PresentationModal
         isOpen={isPresentationModalOpen}
-        onClose={() => { setIsPresentationModalOpen(false); navigateTo("program"); }}
+        onClose={() => {
+          setIsPresentationModalOpen(false);
+          navigateTo("program");
+        }}
         onNavigate={navigateTo}
       />
 
@@ -1618,22 +1795,33 @@ const App: React.FC = () => {
       {isOpeningSlideOpen && (
         <div className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center p-8">
           <button
-            onClick={() => { setIsOpeningSlideOpen(false); window.location.hash = ""; }}
+            onClick={() => {
+              setIsOpeningSlideOpen(false);
+              window.location.hash = "";
+            }}
             className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-2xl cursor-pointer"
-          >✕</button>
-          <img src="./poster.png" alt="InSites Workshop" className="max-h-[55vh] rounded-2xl border border-slate-200 shadow-lg mb-6" />
-          <h1 className="text-3xl md:text-4xl font-black text-slate-800 text-center leading-tight mb-2">
-            InSites: Significance Assessment <br />through the Looking Glass of Gen-AI
+          >
+            ✕
+          </button>
+          <img
+            src="./poster.png"
+            alt="InSites Workshop"
+            className="max-h-[55vh] rounded-2xl border border-slate-200 shadow-lg mb-6"
+          />
+          <h1 className="text-4xl md:text-4xl font-black text-slate-800 text-center leading-tight mb-2">
+            InSites: Significance Assessment <br />
+            through the Looking Glass of Gen-AI
           </h1>
- 
-          <p className="text-2xl text-slate-800 mb-6">Dr. Yael Alef &amp; Yuval Shafriri · InSites Knowledge Lab · Technion</p>
-        
-                  <p className="text-2xl text-slate-800 mb-6">Dr. Yael Alef &amp; Yuval Shafriri · InSites Knowledge Lab · Technion</p>
-  <a
+
+          <p className="text-lg text-slate-800 mb-6">
+            Dr. Yael Alef &amp; Yuval Shafriri · InSites Knowledge Lab ·
+            Technion
+          </p>
+          <a
             href="https://bit.ly/insites-caa"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-3xl md:text-5xl font-black text-indigo-600 hover:text-indigo-700 transition-colors underline underline-offset-4"
+            className="text-4xl md:text-4xl font-normal text-indigo-800 hover:text-indigo-700 transition-colors underline underline-offset-4"
           >
             bit.ly/insites-caa
           </a>

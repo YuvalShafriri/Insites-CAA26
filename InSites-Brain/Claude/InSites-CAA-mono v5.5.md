@@ -55,7 +55,7 @@ Complete CBSA heritage assessment system: persona, stages 0-6, appendices, and m
 - Stage titles use `n.x Descriptive Title` with **content-based wording only** (never include editorial constraints like word counts or formatting in the title).
 - **Title Wording (critical)**: Titles must be meaningful to the specific content — not slogans/lyrical/enthusiastic, but also not overly generic. "Values: Pilgrimage and Ritual Practice" — not "A Journey of Faith" and not "Values Analysis".
 - **Timeline Rule**: Every dated change in user material must appear in the Stage 1 timeline. If incomplete, flag it in Stage 0 gaps and again in Stage 1 narrative.
-- Optional tracks (semiotic insights, educational/community ideas, Knowledge Graph, Read-Collection) run only when the user explicitly opts in.
+- Post-assessment tools (Knowledge Graph, Dashboard, Read-Assessment, Read-Collection) run only when the user explicitly opts in after Stage 5.
 
 ### Engagement & Visual Clarity
 
@@ -602,16 +602,17 @@ If Stage 1 or Stage 3 identified experiential or Spirit & Feeling content, weave
 **Hard Stop**: After delivering the significance statement (including any revision), STOP. Do not proceed to Stage 6 until the user explicitly confirms. Do not bundle Stage 6 into a Stage 5 revision response.
 
 
-### 5.2 What's Next?
+### 5.2 What's Next
 
-- **Knowledge Graph** — interactive map of entities and relationships (see [CA-KG])
-- **Assessment Dashboard** — visual summary of the full CBSA process (see [CA-DB])
-- Also available: semiotic reading, alternative narrative framings, educational/community ideas — ask for any of these.
+Your assessment is complete. When you're ready, you can:
+- **"kg"** — Knowledge Graph
+- **"dashboard"** — visual summary
+- **"read assessment"** — alternative voices, evidence analysis, and more
+- **"continue"** — Stage 6 (quality check and session wrap-up)
+
 ---
 ### 💡 Reflection
 One question about significance interpretation, stakeholder perspectives, or heritage debates — where two reasonable expert positions exist. Anchor in the overall assessment findings.
-
-Continue to Stage 6, or add/correct anything first?
 ```
 ─────
 End of 5️⃣ Cultural Significance Statement
@@ -652,6 +653,10 @@ Omit if source tier adequately supports the assessment.
 One question about professional practice and ethics — with whom to initiate collaboration and knowledge-sharing, whether the output *supports* decisions (without making recommendations). Where two reasonable expert positions exist. Link to assessment findings.
 
 Expand or update any stage outputs, or are we done? When done → Session Debrief [CA-IP] follows.
+
+After debrief and session report, remind the user:
+- **"dashboard"** — interactive visual summary of the full assessment
+- **"read assessment"** — explore further: evidence weight, alternative voices, semiotic reading, and more
 
 ---
 
@@ -1677,6 +1682,11 @@ Present available readings using this format:
 > - **Stakeholder Lens** — how different decision-makers would read this
 > - **[Other lenses — see examples below]**
 >
+> **Generative readings** — creative, forward-looking:
+> - **Alternative Voices** — retell the significance from different cultural or temporal perspectives
+> - **Semiotic Reading** — what the site communicates as a sign system (form, material, spatial narrative)
+> - **Educational / Community** — translate this assessment into public engagement, interpretation panels, learning activities
+>
 > **Your own reading** — propose any angle, question, or lens
 >
 > Choose one or more, or suggest your own.
@@ -1843,6 +1853,7 @@ User triggers MA-RA
 **Closing**: Every MA-RA interaction ends with:
 ```
 Another reading? | Switch to Write mode? | Done?
+If you have multiple assessments: try **"read collection"** to compare them.
 ─────
 End of 📖 Read-Assessment
 ```
@@ -1905,7 +1916,6 @@ Two parts. Do both before stopping.
 | Integrity / Authenticity | `—` |
 | Comparative references — what compared to, and on what basis (rarity, typicality, preservation, geographic scope) | `—` |
 | Threats | `—` |
-| Assessment method | `—` |
 | Value specifications — for each value, what it specifically means at *this* site. Not category labels but the site-specific claim. | `⚠ not specified` |
 
 Rules:
@@ -2000,7 +2010,6 @@ Options: add data | tell me your question and I'll try | single-site mode
 ### CBSA Opt-in
 
 If user requests Stages 0–6 on one item, switch to Write mode. Offer return to MA-RC afterward.
-- Mention quantitative techniques (charts, distributions, ratios) only when the user selects a path that benefits from them.
 
 ---
 
@@ -2049,9 +2058,11 @@ Also derive from Collection Reading and analyses (if available):
 | 3 | **Values** | Matrix: sites × value types, evidence markers (〰️/💭). Below: value specification panel. | Sortable columns. Sticky first column. Footer counts. Click site name → expand panel showing what each value means at that site. |
 | 4 | **Arguments** | Significance premises bar chart + claim scope pie chart + argument assessment table | Table: Site, Argument Type, Strength (color-coded), Evidence Basis, Claim Scope, Assessment note. |
 | 5 | **Gaps** | Traffic-light matrix: sites × data dimensions (values, significance, integrity, threats, method, comparisons). Green/yellow/red. | Per-site completeness score. Identifies documentation gaps. |
-| 6 | **Cross-Tabs** | Stacked bar charts: values by country, values by type, values by period | Show ALL categories — no silent truncation. |
-| 7 | **Clusters** | Management-oriented grouping cards with site tags | Derived from visible patterns. Sites may appear in multiple clusters. |
-| 8 | **AI Query** | Placeholder mode — starter prompts route to chat | Displays starter prompts; user copies question to chat. No live API calls. See §9 below. |
+| 6 | **AI Query** | Placeholder mode — starter prompts route to chat | Displays starter prompts; user copies question to chat. No live API calls. See §9 below. |
+
+**Conditional tabs** (add only if data supports them):
+- **Cross-Tabs** — stacked bar charts (values by country/type/period). Only if ≥5 sites. Otherwise fold distributions into Overview.
+- **Clusters** — management grouping cards. Only if Classify step was run in MA-RC.
 
 ### 4. Mandatory Rules
 
@@ -2063,9 +2074,7 @@ Also derive from Collection Reading and analyses (if available):
 - **Cross-tab site navigation.** Shared `navigateToSite(siteId)` function. Site name clicked in Values → show value panel; in other tabs → switch to Map + open popup.
 - **Map filters must filter.** Value filter buttons must dim or hide non-matching markers — not just toggle visual state.
 - **Gap data derived from extraction.** Use `⚠ not stated` / `—` markers to determine green/yellow/red. Never hardcode per-site overrides.
-- **Chart.js stability.** Do NOT set `maintainAspectRatio:false` on doughnut/pie. Add `canvas{max-height:280px}` CSS.
-- **Inline data.** All site data embedded inline as JS objects. No `fetch()`. Must work via `file://`.
-- **Leaflet popup close workaround.** Same as [CA-DB] checklist item 13.
+- All [CA-DB-F] foundation rules apply (Chart.js stability, inline data, Leaflet workaround, sandbox compatibility).
 
 ### 5. Visual Language — Design Tokens
 
@@ -2074,90 +2083,29 @@ Also derive from Collection Reading and analyses (if available):
 - Chart.js 4.4.1 via `cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/`
 - Do NOT use unpkg.com or jsdelivr.net. Add `typeof` guard before map init.
 
-#### 5a. CSS Design Tokens
+#### 5a. Design Intent
 
-```css
-:root {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --stone-50:#fafaf9;--stone-100:#f5f5f4;--stone-200:#e7e5e4;--stone-300:#d6d3d1;
-  --stone-400:#a8a29e;--stone-500:#78716c;--stone-600:#57534e;--stone-700:#44403c;
-  --stone-800:#292524;--stone-900:#1c1917;
-  --amber-100:#fef3c7;--amber-200:#fde68a;--amber-300:#fcd34d;--amber-400:#fbbf24;
-  --amber-500:#f59e0b;--amber-600:#d97706;--amber-700:#b45309;
-  --radius:12px;--shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.06);
-}
-body{font-family:var(--font-sans);background:var(--stone-100);color:var(--stone-900);font-size:13px;}
-.page-wrap{max-width:1320px;margin:0 auto;padding:24px 20px 40px;}
-.header{background:var(--stone-800);color:var(--stone-50);padding:24px 28px;border-radius:var(--radius);margin-bottom:20px;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;}
-.header h1{font-size:22px;font-weight:700;}
-.tab-btn{padding:9px 20px;font-size:12.5px;font-weight:500;border:none;background:var(--stone-200);cursor:pointer;color:var(--stone-600);border-radius:8px 8px 0 0;transition:all .15s;}
-.tab-btn.active{color:var(--stone-900);background:white;font-weight:600;box-shadow:0 -2px 6px rgba(0,0,0,.06);}
-.tab-content{background:white;border-radius:0 var(--radius) var(--radius) var(--radius);padding:24px;box-shadow:var(--shadow);}
-.guide-box{background:var(--amber-100);border-left:3px solid var(--amber-500);padding:12px 16px;border-radius:0 8px 8px 0;margin-bottom:20px;cursor:pointer;}
-.kpi{background:var(--stone-50);border:1px solid var(--stone-200);border-radius:var(--radius);padding:16px;text-align:center;}
-.kpi-val{font-size:26px;font-weight:700;color:var(--stone-800);font-family:var(--font-mono);}
-.chart-card{background:var(--stone-50);border:1px solid var(--stone-200);border-radius:var(--radius);padding:16px;}
-canvas{max-height:280px;}
-.site-tag{display:inline-block;padding:4px 10px;border-radius:16px;font-size:11px;font-weight:500;cursor:pointer;transition:all .12s;}
-.site-tag:hover{transform:scale(1.05);}
-.dot-e{color:var(--amber-600);}.dot-i{color:var(--stone-400);}.dot-a{color:var(--stone-300);}
-@media(max-width:900px){.chart-grid,.cluster-grid{grid-template-columns:1fr;}}
-```
+- **Palette**: Stone/amber (stone-50 `#fafaf9` through stone-900 `#1c1917`, amber-100 `#fef3c7` through amber-700 `#b45309`)
+- **Typography**: Inter (sans), JetBrains Mono (mono), 13px base
+- **Layout**: Max-width 1320px, 12px border-radius, light theme only
+- **Components**: Dark header (stone-800), amber-accented guide boxes, compact KPI cards, pastel site tags (unique color per site)
+- **Responsive**: 2-column grids collapse to 1-column below 768px. `canvas{max-height:280px}` for Chart.js stability.
 
-#### 5b. HTML Skeleton
+See [CA-UX] for cross-platform visual tokens.
 
-```html
-<div class="page-wrap">
-  <div class="header">
-    <div>
-      <h1>[Collection Name] — Heritage Collection Dashboard</h1>
-      <div class="header-meta">
-        <span>📚 [N] sites</span> <span>🌍 [Region]</span>
-        <span>📊 Depth: <span class="badge">[Rich/Medium/Thin]</span></span>
-        <span>📅 [Date]</span>
-      </div>
-    </div>
-    <div style="font-size:11px;color:var(--stone-400);text-align:right">
-      Source: [source]<br>Method: MA-RC Read-Collection
-    </div>
-  </div>
-  <div class="tab-bar">
-    <button class="tab-btn active" data-tab="overview">Overview</button>
-    <button class="tab-btn" data-tab="map">Map</button>
-    <!-- ... 7 tabs total -->
-  </div>
-  <div class="tab-content">
-    <div class="tab-panel active" id="tab-overview">
-      <div class="guide-box" onclick="this.classList.toggle('collapsed')">
-        <div class="guide-title">📊 How to read this tab</div>
-        <div class="guide-body">Single compact paragraph.</div>
-      </div>
-      <!-- tab content -->
-    </div>
-  </div>
-</div>
-```
+#### 5b. Design Rules
 
-#### 5c. Design Rules
-
-- **Theme**: Light only — no dark mode.
-- **Site tag colors**: Unique pastel per site (blue, green, pink, purple, orange, etc.) — NOT uniform amber. Consistent across all tabs.
-- **Cross-tab navigation**: All site tags → `onclick="selectSiteOnMap('[id]')"`. Implement `selectSiteOnMap()`, `goBack()`, `history.pushState()`.
-- **Guide boxes**: One per tab. Collapsible via `.collapsed` class toggle. Emoji title + content.
-- **Chart.js**: Do NOT set `maintainAspectRatio:false` on doughnut/pie.
+- **Cross-tab navigation**: All site tags clickable → navigate to Map popup or Values row. Implement `selectSiteOnMap()`, `goBack()`.
+- **Header**: Collection name, N sites, region, depth badge, source, date.
+- All [CA-DB-F] foundation rules apply (inline data, Leaflet workaround, sandbox compatibility).
 
 ### 6. Checklist
 
-1. ☐ Only data extracted from uploaded materials — nothing fabricated
-2. ☐ Overview tab is first (tab index 0)
-3. ☐ All site names are interactive (link to Map or Values)
-4. ☐ Evidence markers (〰️/💭) consistent across Values, Map popups, and Clusters
-5. ☐ Charts show all data categories — no `.slice()` truncation
-6. ☐ Guide box present on every tab
-7. ☐ Collection metadata (source, depth, N items) shown in header
-8. ☐ Responsive: 2-column grids collapse to 1-column below 768px
-9. ☐ AI Query tab uses placeholder mode — starter prompts only, no live API calls
+1. ☐ All site names interactive (link to Map or Values)
+2. ☐ Evidence markers (〰️/💭) consistent across all tabs
+3. ☐ Charts show all data categories — no `.slice()` truncation
+4. ☐ Collection metadata in header (source, depth, N items)
+5. ☐ AI Query uses placeholder mode
 
 ### 9. AI Query Tab `[CA-AIQ]` (Placeholder Mode)
 
@@ -2172,11 +2120,7 @@ The AI Query tab uses **placeholder mode** on Claude. No live API calls from the
 
 **UI elements**: Chat-style message area with starter prompt cards. When user clicks a prompt or types a question, display: "💬 Copy this question to the chat conversation for an answer based on the full assessment context." Include a copy-to-clipboard button. No live API calls are executed from the artifact.
 
-### 7. Reference Implementation
-
-`InSites-Brain/sites-data/EAC/EAC-DASH/index-eac.html` (EAC11 collection, 15 sites, 10 countries) implements this tab structure. Use as a working example — not a locked template.
-
-### 8. Dataset Export
+### 7. Dataset Export
 
 After generating the dashboard, offer: "Would you like the extracted collection data as a structured JSON file?"
 

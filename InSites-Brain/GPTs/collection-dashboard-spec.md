@@ -13,23 +13,25 @@ Generate a collection-level dashboard after MA-RC Read-Collection analysis. Visu
 - Execute only on acceptance — do not auto-generate.
 - **Format**: Single self-contained HTML file (vanilla JS, Chart.js + Leaflet from CDN).
 
-## Tab Structure (8 tabs, fixed order)
+## Tab Structure (6 mandatory + conditional)
 
 | # | Tab | Content |
 |---|-----|---------|
 | 1 | Overview | KPI cards + 4 distribution charts |
 | 2 | Map | Leaflet map with circle markers, value filter buttons |
-| 3 | Values | Matrix: sites × value types (●/◐/○), sortable |
+| 3 | Values | Matrix: sites × value types (●/◐/○), sortable. Below: value specification panel. |
 | 4 | Arguments | Significance premises + claim scope analysis |
 | 5 | Gaps | Traffic-light matrix: sites × data dimensions |
-| 6 | Cross-Tabs | Stacked bar charts by country/type/period |
-| 7 | Clusters | Management-oriented grouping cards |
-| 8 | [Report] | Collection assessment summary (optional — see `collection-report-spec.md` [CA-RPT-C]) |
-| 9 | AI Query | Starter prompts for GPT conversation (placeholder mode) |
+| 6 | AI Query | Starter prompts for GPT conversation (placeholder mode) |
+
+**Conditional tabs** (add only if data supports them):
+- **Cross-Tabs** — stacked bar charts (values by country/type/period). Only if ≥5 sites. Otherwise fold distributions into Overview.
+- **Clusters** — management grouping cards. Only if Classify step was run in MA-RC.
+- **[Report]** — Collection assessment summary (optional — see `collection-report-spec.md` [CA-RPT-C]).
 
 ## Data Extraction
 
-Build per-site JSON from MA-RC Step 2 output: name, country, coordinates, type, period, description, significance summary, values (e/i/a), integrity, threats, method, comparative basis.
+Build per-site JSON from MA-RC Step 2 output: name, country, coordinates, type, period, description, significance summary, values (e/i/a), integrity, threats, comparative basis.
 
 ## Mandatory Rules
 

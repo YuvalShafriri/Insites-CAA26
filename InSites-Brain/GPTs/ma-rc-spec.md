@@ -49,7 +49,6 @@ Two parts. Do both before stopping.
 | Integrity / Authenticity | `—` |
 | Comparative references — what compared to, on what basis | `—` |
 | Threats | `—` |
-| Assessment method | `—` |
 | Value specifications — site-specific claims per value | `⚠ not specified` |
 
 Rules:

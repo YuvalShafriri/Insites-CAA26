@@ -502,11 +502,13 @@ If Stage 1 or Stage 3 identified experiential or Spirit & Feeling content, weave
 **Hard Stop**: After delivering the significance statement (including any revision), STOP. Do not proceed to Stage 6 until the user explicitly confirms. Do not bundle Stage 6 into a Stage 5 revision response.
 
 
-### 5.2 What's Next?
+### 5.2 What's Next
 
-- **Knowledge Graph** — interactive map of entities and relationships (see kg-spec.md)
-- **Assessment Dashboard** — visual summary of the full CBSA process (see dashboard-spec.md)
-- Also available: semiotic reading, alternative narrative framings, educational/community ideas — ask for any of these.
+Your assessment is complete. When you're ready, you can:
+- **"kg"** — Knowledge Graph
+- **"dashboard"** — visual summary
+- **"read assessment"** — alternative voices, evidence analysis, and more
+- **"continue"** — Stage 6 (quality check and session wrap-up)
 ---
 ### 💡 Reflection
 One question about significance interpretation, stakeholder perspectives, or heritage debates — where two reasonable expert positions exist. Anchor in the overall assessment findings.
@@ -552,6 +554,10 @@ Omit if source tier adequately supports the assessment.
 One question about professional practice and ethics — with whom to initiate collaboration and knowledge-sharing, whether the output *supports* decisions (without making recommendations). Where two reasonable expert positions exist. Link to assessment findings.
 
 Expand or update any stage outputs, or are we done? When done → Session Debrief [CA-IP] follows.
+
+After debrief and session report, remind the user:
+- **"dashboard"** — interactive visual summary of the full assessment
+- **"read assessment"** — explore further: evidence weight, alternative voices, semiotic reading, and more
 
 ---
 

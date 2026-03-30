@@ -79,6 +79,11 @@ Present available readings using this format:
 > - **Stakeholder Lens** — how different decision-makers would read this
 > - **[Other lenses — see examples below]**
 >
+> **Generative readings** — creative, forward-looking:
+> - **Alternative Voices** — retell the significance from different cultural or temporal perspectives
+> - **Semiotic Reading** — what the site communicates as a sign system (form, material, spatial narrative)
+> - **Educational / Community** — translate this assessment into public engagement, interpretation panels, learning activities
+>
 > **Your own reading** — propose any angle, question, or lens
 >
 > Choose one or more, or suggest your own.
@@ -244,7 +249,8 @@ User triggers MA-RA
 
 **Closing**: Every MA-RA interaction ends with:
 ```
-Another reading? | Dashboard? | Session Debrief [CA-IP]? | Switch to Write mode? | Done?
+Another reading? | Switch to Write mode? | Done?
+If you have multiple assessments: try **"read collection"** to compare them.
 ─────
 End of 📖 Read-Assessment
 ```
