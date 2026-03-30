@@ -1506,8 +1506,8 @@ const App: React.FC = () => {
                       <ResourceLink
                         onClick={() => navigateTo("presentation")}
                         icon={<Bot size={16} />}
-                        label="Agent4Agents (Workshop Activity)"
-                        secondaryLabel="Build your own AI system instructions — Ethics in Practice session"
+                        label="Build Your Own AI Assistant"
+                        secondaryLabel="Design your own AI agent — choose its expertise, principles, and workflow"
                         highlight={true}
                         colorScheme="indigo"
                       />
