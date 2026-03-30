@@ -591,10 +591,11 @@ const App: React.FC = () => {
     setSelectedNodeDetails(null);
 
     // Use pre-built data for known samples (unless AI Live mode is on)
-    if (!forceApi && kgSelectedSample && PREBUILT_GRAPHS[kgSelectedSample]) {
+    const sampleKey = kgSelectedSample || "zaira";
+    if (!forceApi && PREBUILT_GRAPHS[sampleKey]) {
       setIsGraphLoading(true);
       await new Promise((resolve) => setTimeout(resolve, 3500));
-      setGraphData(PREBUILT_GRAPHS[kgSelectedSample]);
+      setGraphData(PREBUILT_GRAPHS[sampleKey]);
       setIsGraphLoading(false);
       return;
     }
