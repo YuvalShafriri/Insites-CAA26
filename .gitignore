@@ -6,6 +6,7 @@ management/
 content-dev/
 promptsEngineering/
 sakem-li/
+/docs/
 InSites Budget.md
 .vscode/
 *.code-workspace
