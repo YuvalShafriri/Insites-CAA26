@@ -1514,7 +1514,7 @@ const App: React.FC = () => {
                         href="https://forms.gle/zqsZA7DXNJVe4zJc7"
                         icon={<Share2 size={16} />}
                         label="Share Your Session"
-                        secondaryLabel="Share your assessment session link with the group"
+                        secondaryLabel="Share your session link for our research"
                         highlight={true}
                         colorScheme="amber"
                       />
