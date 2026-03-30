@@ -1503,7 +1503,7 @@ const App: React.FC = () => {
                         colorScheme="emerald"
                       />
                       <ResourceLink
-                        href="https://gemini.google.com/gem/1LbC3oHGIS83rP8uWdIEEeaU9_ixfEMh1?usp=sharing"
+                        href="https://gemini.google.com/gem/1OI5VSeNb5J94Rr53Abuv8VK5nNkXq7jF?usp=sharing"
                         icon={<Bot size={16} />}
                         label="Build Your Own AI Assistant"
                         secondaryLabel="Design your own AI agent — choose its expertise, principles, and workflow"
@@ -1591,7 +1591,7 @@ const App: React.FC = () => {
                               colorScheme="emerald"
                             />
                             <ResourceLink
-                              href="https://gemini.google.com/gem/1LbC3oHGIS83rP8uWdIEEeaU9_ixfEMh1?usp=sharing"
+                              href="https://gemini.google.com/gem/1OI5VSeNb5J94Rr53Abuv8VK5nNkXq7jF?usp=sharing"
                               icon={<Sparkles size={16} />}
                               label="Build Agent (Gemini)"
                               noBorder

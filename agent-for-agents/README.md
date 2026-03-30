@@ -4,7 +4,7 @@ An AI that helps you design your own AI agent — choose its expertise, principl
 
 ## Quick Start
 
-[Open in Gemini](https://gemini.google.com/gem/1LbC3oHGIS83rP8uWdIEEeaU9_ixfEMh1?usp=sharing) — click and start building. No setup needed.
+[Open in Gemini](https://gemini.google.com/gem/1OI5VSeNb5J94Rr53Abuv8VK5nNkXq7jF?usp=sharing) — click and start building. No setup needed.
 
 ## Deploy What You Built
 
