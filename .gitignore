@@ -10,7 +10,8 @@ sakem-li/
 
 # === Sites data — keep only caa26-workshop-sitesData tracked ===
 InSites-Brain/sites-data/misc-sites-data/
-InSites-Brain/sites-data/*.pdf
+InSites-Brain/sites-data/misc-sites-data/*.pdf
+# Workshop site PDFs at root of sites-data are tracked (the shared files for participants)
 InSites-Brain/sites-data/*.txt
 InSites-Brain/sites-data/*.js
 InSites-Brain/sites-data/*.json
