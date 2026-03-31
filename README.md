@@ -34,6 +34,7 @@ The best way to understand InSites is to ask it. These questions let the bot int
 | **"What is CBSA?"** | The 7-stage assessment method — evidence-based, human-reviewed |
 | **"What is context effect?"** | The core principle — how contexts and values shape each other |
 | **"What are epistemic markers?"** | How the bot marks what's explicit, inferred 〰️, or interpretive 💭 |
+| **"What can't you do?"** | Reveals boundaries — what it won't attempt and why |
 
 ### Explore capabilities
 
@@ -51,7 +52,6 @@ The best way to understand InSites is to ask it. These questions let the bot int
 | **"What evidence supports that claim?"** | Must cite your documents — file and page |
 | **"What are the data gaps?"** | Stage 0 identifies what's missing before analysis |
 | **"Can you search the web?"** | Should decline — works only with your uploads |
-| **"What can't you do?"** | Reveals boundaries — what it won't attempt and why |
 
 ---
 
