@@ -711,6 +711,18 @@
      GENERIC DYNAMIC TAB RENDERERS
      ══════════════════════════════════════════════════════════════ */
 
+  /* Build site name → id lookup for auto-linking */
+  var siteNameMap = {};
+  data.sites.forEach(function (s) { siteNameMap[s.name] = s.id; });
+
+  function cellHtml(cell) {
+    var val = String(cell == null ? '' : cell);
+    if (siteNameMap[val]) {
+      return '<button class="cd-site-link" data-nav-site="' + escapeHtml(siteNameMap[val]) + '">' + escapeHtml(val) + '</button>';
+    }
+    return escapeHtml(val);
+  }
+
   function renderGenericTable(tabData) {
     if (!tabData || !tabData.columns || !tabData.rows) return '';
     var html = '<div class="cd-card" style="overflow-x:auto">';
@@ -722,7 +734,7 @@
     tabData.rows.forEach(function (row) {
       html += '<tr>';
       row.forEach(function (cell) {
-        html += '<td>' + escapeHtml(cell) + '</td>';
+        html += '<td>' + cellHtml(cell) + '</td>';
       });
       html += '</tr>';
     });
@@ -776,7 +788,7 @@
     });
     html += '</tr></thead><tbody>';
     tabData.rowLabels.forEach(function (rowLabel, ri) {
-      html += '<tr><td style="font-weight:600">' + escapeHtml(rowLabel) + '</td>';
+      html += '<tr><td style="font-weight:600">' + cellHtml(rowLabel) + '</td>';
       var row = tabData.cells[ri] || [];
       row.forEach(function (val) {
         var v = Math.max(0, Math.min(3, val || 0));
