@@ -1,73 +1,94 @@
-# collection-dashboard-spec.md — CA-DB-C Collection Dashboard Specification (GPT)
+# [CA-DB-C] Collection Dashboard — MA-RC Integration
 
-## Purpose
-
-Generate a collection-level dashboard after MA-RC Read-Collection analysis. Visualizes multiple heritage sites with comparative analytics.
-
-**Cross-platform reference**: Visual tokens follow `[CA-UX]`, entity colors follow `[CA-EC]`, AI Query follows `[CA-AIQ]` placeholder mode. See `artifact-ux-contract.md` for the cross-platform source of truth.
-
-## Trigger
+## 1. Trigger
 
 - After MA-RC Step 3 analysis: "Would you like a visual dashboard for this collection?"
 - On direct request: "dashboard", "collection dashboard", "visualize"
-- Execute only on acceptance — do not auto-generate.
-- **Format**: Single self-contained HTML file (vanilla JS, Chart.js + Leaflet from CDN).
+- Execute only on acceptance.
 
-## Tab Structure (6 mandatory + conditional)
+## 2. Output Format — External Runtime
 
-| # | Tab | Content |
-|---|-----|---------|
-| 1 | Overview | KPI cards + 4 distribution charts |
-| 2 | Map | Leaflet map with circle markers, value filter buttons |
-| 3 | Values | Matrix: sites × value types (●/◐/○), sortable. Below: value specification panel. |
-| 4 | Arguments | Significance premises + claim scope analysis |
-| 5 | Gaps | Traffic-light matrix: sites × data dimensions |
-| 6 | AI Query | Starter prompts for GPT conversation (placeholder mode) |
+HTML shell with inline data JSON. Runtime handles all rendering.
 
-**Conditional tabs** (add only if data supports them):
-- **Cross-Tabs** — stacked bar charts (values by country/type/period). Only if ≥5 sites. Otherwise fold distributions into Overview.
-- **Clusters** — management grouping cards. Only if Classify step was run in MA-RC.
-- **[Report]** — Collection assessment summary (optional — see `collection-report-spec.md` [CA-RPT-C]).
+### HTML Shell Template
 
-## Data Extraction
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>__COLLECTION_NAME__ — Collection Dashboard</title>
+  <link rel="stylesheet" href="https://alephplace.com/atar.bot/canvas/dashboard-runtime.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+</head>
+<body>
+  <div id="dashboard-root"></div>
+  <script>window.__COLLECTION_DATA__ = __DATA_JSON__;</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://alephplace.com/atar.bot/canvas/collection-dashboard-runtime.js"></script>
+</body>
+</html>
+```
 
-Build per-site JSON from MA-RC Step 2 output: name, country, coordinates, type, period, description, significance summary, values (e/i/a), integrity, threats, comparative basis.
+Replace `__COLLECTION_NAME__` and `__DATA_JSON__` with actual values. Set `lang="he" dir="rtl"` for Hebrew collections.
 
-## Mandatory Rules
+## 3. Data Extraction
 
-- Overview first (tab index 0)
-- Cross-tab site linking — all site names clickable
-- No silent chart truncation
-- Guide boxes on every tab
-- Collection metadata in header (name, N items, Depth, date)
-- Inline data only — no fetch()
-- Chart.js: no maintainAspectRatio:false on doughnut/pie
+Build per-site JSON from MA-RC Step 2 output.
 
-## AI Query Tab [CA-AIQ]
+## 4. Data Schema
 
-Implements `[CA-AIQ]` **placeholder mode** (GPT platform). No live API calls from the artifact.
+```jsonc
+{
+  "collection": { "name", "source", "depth", "date", "itemCount" },
+  "sites": [{
+    "id", "name", "region", "lat", "lng", "depth", "type", "period",
+    "description", "significanceSummary", "highlight",
+    "values": { "historical": "e"|"i"|"a", /* ... */ },
+    "integrity", "integrityNote", "threats": [],
+    "comparativeBasis", "claimScope"
+  }],
+  "themes": [{
+    "id", "label", "description",
+    "sites": ["siteId"],
+    "evidence": { "siteId": "supporting text" }
+  }],
+  "tabs": [{
+    "id": "arguments", "label": "Arguments", "icon": "📊",
+    "type": "table",
+    "data": { "columns": [...], "rows": [...] }
+  }]
+}
+```
 
-**Starter prompts** (Collection Dashboard):
-1. "What value patterns are shared across sites?"
-2. "How does the geographic distribution look?"
-3. "Compare the assessment methodologies used"
-4. "Where are the biggest data gaps?"
-5. "What management clusters emerge?"
+### Fixed Tabs (rendered by runtime)
 
-Users copy prompts into the GPT conversation for analysis.
+Overview, Map, Values, Themes — always present.
 
-## Checklist
+### Dynamic Tabs (from `data.tabs[]`)
 
-1. ☐ Only extracted data — nothing fabricated
-2. ☐ Overview tab first
-3. ☐ All site names interactive
-4. ☐ Value indicators consistent (●/◐/○)
-5. ☐ Charts show all categories
-6. ☐ Guide box per tab
-7. ☐ Collection metadata in header
-8. ☐ Responsive layout
-9. ☐ AI Query tab in placeholder mode
+Include analysis results from MA-RC Step 3. Supported types:
 
-## Reference
+| Type | `data` shape |
+|------|-------------|
+| `table` | `{ columns: [...], rows: [...] }` |
+| `cards` | `[{ title, body, level, badges }]` |
+| `matrix` | `{ rowLabels, colLabels, cells }` (0-3 scale) |
+| `prose` | `[{ title, body }]` |
+| `custom` | `{ html: "..." }` |
 
-`InSites-Brain/sites-data/EAC/EAC-DASH/index-eac.html` — working example (not locked template).
+### Themes (MANDATORY)
+
+Always generate themes from MA-RC analysis. Minimum: group sites by overlapping value patterns. Include evidence per site.
+
+## 5. Data Quality Rules
+
+- Only extracted data — nothing fabricated
+- `themes[]` must be non-empty
+- All site names must have valid `id`
+- Coordinates: extract / infer / `null`
+- Values: use `"e"` / `"i"` / `"a"` consistently
+
+## 6. Post-Dashboard Offer
+
+"Would you like the extracted collection data as a structured JSON file?"
