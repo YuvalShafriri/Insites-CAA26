@@ -26,14 +26,13 @@ The bot outputs an HTML shell that loads the dashboard runtime from CDN. The bot
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>__ASSET_NAME__ — CBSA Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
   <link rel="stylesheet" href="https://alephplace.com/atar.bot/canvas/dashboard-runtime.css"/>
 </head>
 <body>
-  <div id="dashboard-app"></div>
+  <div id="dashboard-root"></div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script>
     window.__DASHBOARD_DATA__ = {
       // ... extracted data object (see §4 Data Schema) ...
